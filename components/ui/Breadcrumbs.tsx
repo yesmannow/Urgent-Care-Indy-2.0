@@ -28,6 +28,9 @@ const segmentLabels: Record<string, string> = {
   "patient-intake": "New Patient Registration",
   "dot-physical": "DOT Physical Form",
   "sports-physical": "Sports Physical Form",
+  "patient-resources": "Patient Resources",
+  pricing: "Pricing",
+  "occupational-health": "Occupational Health",
 };
 
 function getLabel(segment: string): string {

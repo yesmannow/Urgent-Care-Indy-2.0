@@ -42,4 +42,6 @@ export const patientServices = [
 export const resourceLinks = [
   { name: "Patient Forms", href: "/resources/forms" },
   { name: "Insurance Guide", href: "/payments-insurance" },
+  { name: "Pricing", href: "/patient-resources/pricing" },
+  { name: "Occupational Health", href: "/services/occupational-health" },
 ] as const;

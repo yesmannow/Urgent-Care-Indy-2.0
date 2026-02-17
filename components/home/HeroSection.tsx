@@ -22,7 +22,11 @@ const item = {
   },
 };
 
-export function HeroSection() {
+interface HeroSectionProps {
+  onSaveSpotClick?: () => void;
+}
+
+export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
   return (
     <section
       className="relative min-h-[85vh] flex items-center overflow-hidden"
@@ -69,12 +73,22 @@ export function HeroSection() {
               variants={item}
               className="mt-8 flex flex-wrap gap-4"
             >
-              <Link
-                href="/schedule"
-                className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
-              >
-                Save My Spot
-              </Link>
+              {onSaveSpotClick ? (
+                <button
+                  type="button"
+                  onClick={onSaveSpotClick}
+                  className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                >
+                  Save My Spot
+                </button>
+              ) : (
+                <Link
+                  href="/schedule"
+                  className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                >
+                  Save My Spot
+                </Link>
+              )}
               <Link
                 href="/portal"
                 className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/80 bg-transparent text-white font-semibold hover:bg-white/10 hover:border-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900"

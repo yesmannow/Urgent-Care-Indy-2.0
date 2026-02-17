@@ -3,13 +3,15 @@ import { Plus } from "lucide-react";
 import { ClinicMap } from "@/components/ui/ClinicMap";
 
 const serviceLinks = [
-  { href: "/employer-services", label: "Occupational Health" },
+  { href: "/services/occupational-health", label: "Occupational Health" },
+  { href: "/employer-services", label: "Employer Services" },
   { href: "/services/bone-density", label: "Bone Density" },
   { href: "/services/sleep-apnea", label: "Sleep Apnea" },
 ];
 
 const quickLinks = [
   { href: "/resources/forms", label: "Patient Forms" },
+  { href: "/patient-resources/pricing", label: "Pricing" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact Us" },
   { href: "https://quickclick.com/r/6nwjs", label: "Pay Bill Online", external: true },
@@ -32,8 +34,8 @@ export function Footer() {
             <address className="not-italic text-slate-300 text-sm space-y-1">
               <p>7911 N Michigan Rd, Indianapolis, IN 46268</p>
               <a
-                href="tel:+13179566288"
-                className="text-white hover:text-primary-light transition-colors"
+                href="tel:3179566288"
+                className="text-white hover:text-primary-light transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-offset-2 focus:ring-offset-slate-900 rounded"
               >
                 (317) 956-6288
               </a>

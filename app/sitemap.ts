@@ -8,6 +8,7 @@ const staticRoutes = [
   "/employer-services",
   "/insurance",
   "/our-clinic",
+  "/patient-resources/pricing",
   "/patient-services",
   "/pay-bill",
   "/portal",
@@ -15,6 +16,7 @@ const staticRoutes = [
   "/schedule",
   "/services",
   "/services/diagnostics",
+  "/services/occupational-health",
   "/services/prevention",
   "/services/urgent-care",
 ];

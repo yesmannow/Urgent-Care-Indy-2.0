@@ -14,7 +14,7 @@
   /* Medical shadow – subtle blue-tinted depth */
   --shadow-medical: 0 4px 6px -1px rgba(30, 64, 175, 0.05),
     0 2px 4px -1px rgba(30, 64, 175, 0.03);
-  /* Use Inter when set by layout (next/font) */
+  /* Geist from layout (next/font) – variable name kept for compatibility */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
