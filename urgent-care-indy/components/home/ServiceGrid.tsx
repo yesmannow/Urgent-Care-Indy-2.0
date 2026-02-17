@@ -73,7 +73,7 @@ export function ServiceGrid() {
             <motion.div key={title} variants={item}>
               <Link
                 href={href}
-                className="group block rounded-xl bg-white border-2 border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-offset-2"
+                className="group block min-h-[44px] rounded-xl bg-white border-2 border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-offset-2"
               >
                 <div className="relative h-48 w-full overflow-hidden">
                   <Image

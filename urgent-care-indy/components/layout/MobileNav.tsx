@@ -10,14 +10,16 @@ import {
   Stethoscope,
   Microscope,
   HeartHandshake,
+  FileText,
   type LucideIcon,
 } from "lucide-react";
-import { patientServices } from "@/lib/navigation";
+import { patientServices, resourceLinks } from "@/lib/navigation";
 
 const iconMap: Record<(typeof patientServices)[number]["icon"], LucideIcon> = {
   Stethoscope,
   Microscope,
   HeartHandshake,
+  FileText,
 };
 
 type MobileNavProps = {
@@ -163,6 +165,26 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                 >
                   Employer Services
                 </Link>
+
+                {/* Resources */}
+                <div className="border-b border-slate-100 py-3">
+                  <p className="text-slate-500 text-sm font-medium uppercase tracking-wide mb-2">
+                    Resources
+                  </p>
+                  <ul className="space-y-1 pl-0">
+                    {resourceLinks.map(({ name, href }) => (
+                      <li key={href}>
+                        <Link
+                          href={href}
+                          className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5"
+                          onClick={handleLinkClick}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
                 <div className="pt-4 space-y-2">
                   <Link

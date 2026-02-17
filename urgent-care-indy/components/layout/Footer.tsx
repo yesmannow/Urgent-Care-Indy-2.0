@@ -2,18 +2,24 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { ClinicMap } from "@/components/ui/ClinicMap";
 
+const serviceLinks = [
+  { href: "/employer-services", label: "Occupational Health" },
+  { href: "/services/bone-density", label: "Bone Density" },
+  { href: "/services/sleep-apnea", label: "Sleep Apnea" },
+];
+
 const quickLinks = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/pay-bill", label: "Pay Bill" },
-  { href: "/contact", label: "Contact" },
+  { href: "/resources/forms", label: "Patient Forms" },
+  { href: "/careers", label: "Careers" },
+  { href: "/contact", label: "Contact Us" },
+  { href: "https://quickclick.com/r/6nwjs", label: "Pay Bill Online", external: true },
 ];
 
 export function Footer() {
   return (
     <footer className="bg-slate-900 text-white py-12">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-8">
           {/* Brand: Logo + Address + Phone */}
           <div>
             <Link
@@ -34,11 +40,11 @@ export function Footer() {
             </address>
           </div>
 
-          {/* Quick Links */}
+          {/* Services */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-white mb-4">Services</h3>
             <ul className="space-y-2">
-              {quickLinks.map(({ href, label }) => (
+              {serviceLinks.map(({ href, label }) => (
                 <li key={href}>
                   <Link
                     href={href}
@@ -46,6 +52,34 @@ export function Footer() {
                   >
                     {label}
                   </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-semibold text-white mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              {quickLinks.map(({ href, label, external }) => (
+                <li key={href}>
+                  {external ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-300 hover:text-white transition-colors text-sm"
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={href}
+                      className="text-slate-300 hover:text-white transition-colors text-sm"
+                    >
+                      {label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

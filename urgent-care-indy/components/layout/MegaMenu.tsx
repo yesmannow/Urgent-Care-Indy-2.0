@@ -5,6 +5,7 @@ import {
   Stethoscope,
   Microscope,
   HeartHandshake,
+  FileText,
   type LucideIcon,
 } from "lucide-react";
 import { patientServices } from "@/lib/navigation";
@@ -13,6 +14,7 @@ const iconMap: Record<(typeof patientServices)[number]["icon"], LucideIcon> = {
   Stethoscope,
   Microscope,
   HeartHandshake,
+  FileText,
 };
 
 type MegaMenuProps = {

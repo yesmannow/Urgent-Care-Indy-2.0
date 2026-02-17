@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { AirQualityAlert } from "@/components/tools/AirQualityAlert";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -11,9 +12,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Urgent Care Indy | Immediate Care & Occupational Health",
+  title: "Urgent Care Indy | Immediate Care & Occupational Health in Indianapolis",
   description:
-    "Skip the ER. Book online at Urgent Care Indy. Treating minor injuries, illness, and offering employer services in Indianapolis.",
+    "Family-owned urgent care on N Michigan Rd. Treating injuries, illness, and offering DOT physicals. Part of Pike Medical Consultants.",
   keywords: [
     "Urgent Care Indianapolis",
     "Walk-in Clinic",
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased bg-slate-50 min-h-screen flex flex-col`}
       >
+        <JsonLd />
         <AirQualityAlert />
         <Header />
         <main className="flex-1">{children}</main>
