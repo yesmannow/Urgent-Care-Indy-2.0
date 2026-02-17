@@ -27,6 +27,7 @@ const item = {
 
 interface HeroSectionProps {
   onSaveSpotClick?: () => void;
+  language?: import("@/lib/i18n").Language;
 }
 
 function useCurrentTime(intervalMs = 60_000) {
@@ -43,8 +44,36 @@ function useCurrentTime(intervalMs = 60_000) {
   return currentTime;
 }
 
-export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
+export function HeroSection({ onSaveSpotClick, language = "en" }: HeroSectionProps) {
   const lastUpdated = useCurrentTime();
+  const copy =
+    language === "es"
+      ? {
+          h1: "Urgencias que respetan tu tiempo.",
+          sub: "Entra y sal en menos de 45 minutos. Sin cita previa.",
+          ctaSave: "Reservar mi lugar",
+          ctaTele: "Registro de telemedicina",
+          status: "Estado en vivo",
+          wait: "Tiempo de espera",
+          updated: "Actualizado:",
+          openUntil: "Abierto hasta",
+          insurance: "Seguro",
+          insuranceAccepted: "Aceptado",
+          call: "Llamar (317) 956-6288",
+        }
+      : {
+          h1: "Urgent Care that Respects Your Time.",
+          sub: "In and out in under 45 minutes. No appointment needed.",
+          ctaSave: "Save My Spot",
+          ctaTele: "Telemedicine Check-in",
+          status: "Live Status",
+          wait: "Current Wait Time",
+          updated: "Last updated:",
+          openUntil: "Open Until",
+          insurance: "Insurance",
+          insuranceAccepted: "Accepted",
+          call: "Call (317) 956-6288",
+        };
   return (
     <section
       className="relative min-h-[85vh] flex items-center overflow-hidden"
@@ -79,13 +108,13 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
               variants={item}
               className="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight"
             >
-              Urgent Care that Respects Your Time.
+              {copy.h1}
             </motion.h1>
             <motion.p
               variants={item}
               className="mt-4 text-lg md:text-xl text-slate-200"
             >
-              In and out in under 45 minutes. No appointment needed.
+              {copy.sub}
             </motion.p>
             <motion.div
               variants={item}
@@ -98,7 +127,7 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                   className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                   aria-label="Save your spot at our Michigan Road clinic"
                 >
-                  Save My Spot
+                  {copy.ctaSave}
                 </button>
               ) : (
                 <Link
@@ -106,14 +135,14 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                   className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                   aria-label="Save your spot at our Michigan Road clinic"
                 >
-                  Save My Spot
+                  {copy.ctaSave}
                 </Link>
               )}
               <Link
                 href="/portal"
                 className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/80 bg-transparent text-white font-semibold hover:bg-white/10 hover:border-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900"
               >
-                Telemedicine Check-in
+                {copy.ctaTele}
               </Link>
             </motion.div>
           </motion.div>
@@ -135,13 +164,13 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                   aria-hidden
                 />
                 <p className="text-sm font-semibold text-white/90 uppercase tracking-wider">
-                  Live Status
+                  {copy.status}
                 </p>
               </div>
               <div className="space-y-4">
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between gap-4">
-                    <span className="text-slate-200">Current Wait Time</span>
+                    <span className="text-slate-200">{copy.wait}</span>
                     <span className="flex items-center gap-2 font-bold text-white text-lg">
                       <span
                         className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse"
@@ -151,21 +180,23 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                     </span>
                   </div>
                   {lastUpdated && (
-                    <p className="text-xs text-white/70">Last updated: {lastUpdated}</p>
+                    <p className="text-xs text-white/70">
+                      {copy.updated} {lastUpdated}
+                    </p>
                   )}
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-slate-200">Open Until</span>
+                  <span className="text-slate-200">{copy.openUntil}</span>
                   <span className="flex items-center gap-2 font-bold text-white text-lg">
                     <Clock className="h-5 w-5 text-white/80 shrink-0" aria-hidden />
                     6:30 PM
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-slate-200">Insurance</span>
+                  <span className="text-slate-200">{copy.insurance}</span>
                   <span className="flex items-center gap-2 font-bold text-white">
                     <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0" aria-hidden />
-                    Accepted
+                    {copy.insuranceAccepted}
                   </span>
                 </div>
                 <a
@@ -173,7 +204,7 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                   className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900"
                   aria-label="Call (317) 956-6288"
                 >
-                  Call (317) 956-6288
+                  {copy.call}
                 </a>
               </div>
             </motion.div>

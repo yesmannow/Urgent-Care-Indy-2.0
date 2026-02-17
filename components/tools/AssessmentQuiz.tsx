@@ -41,6 +41,12 @@ function outcomeStyles(outcome: QuizOutcome) {
         icon: CheckCircle2,
         title: "text-slate-900",
       };
+    case "primary-care":
+      return {
+        badge: "bg-teal-100 text-teal-950 border-teal-200",
+        icon: CheckCircle2,
+        title: "text-slate-900",
+      };
     case "self-care":
       return {
         badge: "bg-slate-100 text-slate-800 border-slate-200",
@@ -169,6 +175,14 @@ export function AssessmentQuiz() {
             >
               Urgent Care vs ER
             </Link>
+            <a
+              href="https://primarycareindy.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center min-h-[44px] px-4 rounded-xl border border-slate-200 bg-white text-slate-900 font-bold hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+            >
+              Primary Care Indy
+            </a>
             <Link
               href="/schedule"
               className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-xl bg-primary-blue text-white font-extrabold hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
@@ -257,6 +271,8 @@ function ResultStep({ node, onConfirm911 }: { node: QuizResultNode; onConfirm911
   const styles = outcomeStyles(node.outcome);
   const Icon = styles.icon;
 
+  const isExternalPrimaryCta = Boolean(node.primaryCta?.href?.startsWith("http"));
+
   const primaryCta =
     node.outcome === "er-911" ? (
       <button
@@ -267,6 +283,15 @@ function ResultStep({ node, onConfirm911 }: { node: QuizResultNode; onConfirm911
         <PhoneCall className="h-4 w-4" aria-hidden />
         Call 911
       </button>
+    ) : node.primaryCta && isExternalPrimaryCta ? (
+      <a
+        href={node.primaryCta.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-xl bg-primary-blue text-white font-extrabold hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+      >
+        {node.primaryCta.label} <ArrowRight className="h-4 w-4" aria-hidden />
+      </a>
     ) : node.primaryCta ? (
       <Link
         href={node.primaryCta.href}
@@ -293,6 +318,8 @@ function ResultStep({ node, onConfirm911 }: { node: QuizResultNode; onConfirm911
               ? "ER / 911"
               : node.outcome === "urgent-care"
                 ? "Urgent Care"
+                : node.outcome === "primary-care"
+                  ? "Primary Care"
                 : node.outcome === "self-care"
                   ? "Self-care / PCP"
                   : "Info"}

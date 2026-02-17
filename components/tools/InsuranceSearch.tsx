@@ -10,10 +10,17 @@ import {
   searchInsurancePlans,
   type InsurancePlan,
 } from "@/lib/insurancePlans";
+import type { Language } from "@/lib/i18n";
 
 const PHONE_HREF = "tel:+13179566288";
 
-export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }) {
+export function InsuranceSearch({
+  initialQuery = "",
+  language = "en",
+}: {
+  initialQuery?: string;
+  language?: Language;
+}) {
   const inputId = useId();
   const listboxId = useId();
 
@@ -53,6 +60,39 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
   };
 
   const activeDescendantId = active ? `ins-option-${active.carrier}-${active.plan}`.replace(/\s+/g, "-") : undefined;
+
+  const copy =
+    language === "es"
+      ? {
+          placeholder: "Busca tu plan (aseguradora + nombre del plan)…",
+          helper: "Esto consulta nuestra lista publicada. La cobertura varía por plan y puede cambiar; llama para confirmar.",
+          verifyByPhone: "Verificar por teléfono",
+          listedAsAccepted: "Figura como aceptado:",
+          carrierFound: "Aseguradora encontrada:",
+          selectPlanOrCall: "Selecciona un plan para verificar o llámanos.",
+          notFoundTitle: "No aparece en nuestra lista publicada",
+          notFoundBody:
+            "A veces los planes aparecen bajo el nombre de la aseguradora principal. Para la respuesta más rápida, llámanos y verificamos.",
+          callToVerify: "Llamar para verificar",
+          insuranceGuide: "Guía de seguros",
+          noMatches:
+            "Sin coincidencias. Prueba con el nombre de la aseguradora como Anthem o UnitedHealthcare.",
+        }
+      : {
+          placeholder: "Search your plan (carrier + plan name)…",
+          helper: "This checks our published list. Coverage varies by plan and may change—call to confirm.",
+          verifyByPhone: "Verify by phone",
+          listedAsAccepted: "Listed as accepted:",
+          carrierFound: "Carrier found:",
+          selectPlanOrCall: "Select a plan to verify, or call us.",
+          notFoundTitle: "Not found in our published list",
+          notFoundBody:
+            "Plans are sometimes listed under a parent carrier name. For the fastest answer, call us and we’ll verify.",
+          callToVerify: "Call to verify",
+          insuranceGuide: "Insurance guide",
+          noMatches:
+            "No matches. Try a carrier name like Anthem or UnitedHealthcare.",
+        };
 
   return (
     <div ref={containerRef} className="relative w-full max-w-2xl">
@@ -101,7 +141,7 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
                   selectPlan(active);
                 }
               }}
-              placeholder="Search your plan (carrier + plan name)…"
+              placeholder={copy.placeholder}
               className="w-full min-h-[52px] pl-12 pr-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20 text-base"
               autoComplete="off"
               role="combobox"
@@ -113,7 +153,7 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
             />
           </div>
           <p className="mt-2 text-sm text-slate-500">
-            This checks our published list. Coverage varies by plan and may change—call to confirm.
+            {copy.helper}
           </p>
         </div>
         <a
@@ -122,7 +162,7 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
           aria-label="Call to verify insurance"
         >
           <Phone className="h-4 w-4" aria-hidden />
-          Verify by phone
+          {copy.verifyByPhone}
         </a>
       </div>
 
@@ -137,7 +177,7 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-emerald-900 font-semibold"
           >
             <Check className="h-5 w-5 shrink-0 text-emerald-600" aria-hidden />
-            Listed as accepted: {match.carrier} ({match.plan})
+            {copy.listedAsAccepted} {match.carrier} ({match.plan})
           </motion.div>
         ) : match.type === "carrier" ? (
           <motion.div
@@ -149,7 +189,7 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-blue-950 font-semibold"
           >
             <Check className="h-5 w-5 shrink-0 text-primary-blue" aria-hidden />
-            Carrier found: {match.carrier}. Select a plan to verify, or call us.
+            {copy.carrierFound} {match.carrier}. {copy.selectPlanOrCall}
           </motion.div>
         ) : query.trim() ? (
           <motion.div
@@ -165,10 +205,9 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
             <div className="flex items-start gap-3">
               <TriangleAlert className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" aria-hidden />
               <div className="min-w-0">
-                <p className="font-extrabold text-slate-900">Not found in our published list</p>
+                <p className="font-extrabold text-slate-900">{copy.notFoundTitle}</p>
                 <p className="text-sm text-slate-700 mt-1">
-                  Plans are sometimes listed under a parent carrier name. For the fastest answer, call us and we’ll
-                  verify.
+                  {copy.notFoundBody}
                 </p>
                 <div className="mt-3 flex flex-col sm:flex-row gap-2">
                   <a
@@ -176,13 +215,13 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
                     className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-xl bg-slate-900 text-white font-extrabold hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
                   >
                     <Phone className="h-4 w-4" aria-hidden />
-                    Call to verify
+                    {copy.callToVerify}
                   </a>
                   <Link
                     href="/payments-insurance"
                     className="inline-flex items-center justify-center min-h-[44px] px-4 rounded-xl border border-slate-200 bg-white text-slate-900 font-bold hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
                   >
-                    Insurance guide
+                    {copy.insuranceGuide}
                   </Link>
                 </div>
               </div>
@@ -205,8 +244,7 @@ export function InsuranceSearch({ initialQuery = "" }: { initialQuery?: string }
           >
             {results.length === 0 ? (
               <li className="px-4 py-3 text-slate-600 text-sm">
-                No matches. Try a carrier name like <span className="font-semibold text-slate-900">Anthem</span> or{" "}
-                <span className="font-semibold text-slate-900">UnitedHealthcare</span>.
+                {copy.noMatches}
               </li>
             ) : (
               results.map((p, idx) => {

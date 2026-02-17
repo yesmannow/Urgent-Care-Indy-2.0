@@ -1,4 +1,3 @@
-import { StickyAnnouncementBar } from "@/components/home/StickyAnnouncementBar";
 import { HomePageWithSaveSpot } from "@/components/home/HomePageWithSaveSpot";
 import { DiagnosticsBento } from "@/components/home/DiagnosticsBento";
 import { ProviderPreview } from "@/components/home/ProviderPreview";
@@ -10,12 +9,16 @@ import { WhyPartnerSection } from "@/components/home/WhyPartnerSection";
 import { CorporateQuoteSection } from "@/components/home/CorporateQuoteSection";
 import { AboutClinicSection } from "@/components/sections/AboutClinicSection";
 import { PatientResourceSection } from "@/components/home/PatientResourceSection";
+import { TriageMatrix } from "@/components/home/TriageMatrix";
+import { cookies } from "next/headers";
+import { DEFAULT_LANGUAGE, LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/i18n";
 
 export default async function Home() {
+  const language = normalizeLanguage((await cookies()).get(LANGUAGE_COOKIE)?.value ?? DEFAULT_LANGUAGE);
   return (
     <>
-      <StickyAnnouncementBar />
       <HomePageWithSaveSpot
+        language={language}
         insertAfterHero={
           <>
             <DiagnosticsBento />
@@ -31,6 +34,7 @@ export default async function Home() {
         insertBeforeMain={<AboutClinicSection />}
         bottomSections={<PatientResourceSection />}
       />
+      <TriageMatrix />
     </>
   );
 }
