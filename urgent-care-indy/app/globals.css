@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Medical palette – primary */
+  --color-primary: #0f172a; /* Slate 900 – Text & Heavy Headers */
+  --color-primary-blue: #1e40af; /* Blue 800 – Trust/Brand Primary */
+  --color-primary-light: #3b82f6; /* Blue 500 – Focus/Accents */
+  /* Accent */
+  --color-accent-red: #dc2626; /* Red 600 – Emergency/Urgent Actions */
+  --color-accent-teal: #0d9488; /* Teal 600 – Wellness/Calm */
+  /* Surface */
+  --color-surface-white: #ffffff;
+  --color-surface-cream: #f8fafc; /* Slate 50 – Soft Backgrounds */
+  /* Medical shadow – subtle blue-tinted depth */
+  --shadow-medical: 0 4px 6px -1px rgba(30, 64, 175, 0.05),
+    0 2px 4px -1px rgba(30, 64, 175, 0.03);
+  /* Use Inter when set by layout (next/font) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Primary button pulse on hover */
+@keyframes pulse-hover {
+  0%,
+  100% {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  50% {
+    box-shadow: 0 20px 25px -5px rgb(59 130 246 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@layer components {
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+
+  .btn-primary-pulse:hover {
+    animation: pulse-hover 1.5s ease-in-out infinite;
+  }
+
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 1280px;
+  }
+}
