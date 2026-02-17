@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, ChevronRight } from "lucide-react";
 
-const logos = [
+const featuredInsurance = ["Anthem", "UnitedHealthcare", "Cigna", "Aetna"];
+const allLogos = [
   "Anthem",
   "UnitedHealthcare",
   "Cigna",
@@ -41,6 +43,36 @@ export function TrustSignals() {
           Trusted by patients and employers
         </h2>
 
+        {/* Insurance We Accept */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mb-10"
+        >
+          <h3 className="text-xl font-bold text-slate-900 mb-4 text-center">
+            Insurance We Accept
+          </h3>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-4">
+            {featuredInsurance.map((name) => (
+              <span key={name} className="text-slate-900 font-bold text-lg">
+                {name}
+              </span>
+            ))}
+            <span className="text-slate-500 font-medium">+ more</span>
+          </div>
+          <p className="text-center">
+            <Link
+              href="/payments-insurance"
+              className="inline-flex items-center gap-1 text-teal-600 font-semibold hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded"
+            >
+              View Full List
+              <ChevronRight size={18} className="text-teal-500" aria-hidden />
+            </Link>
+          </p>
+        </motion.div>
+
         {/* Scrolling marquee */}
         <motion.div
           variants={container}
@@ -50,7 +82,7 @@ export function TrustSignals() {
           className="overflow-hidden mb-10"
         >
           <div className="flex animate-marquee gap-12 whitespace-nowrap">
-            {[...logos, ...logos].map((name, i) => (
+            {[...allLogos, ...allLogos].map((name, i) => (
               <span
                 key={`${name}-${i}`}
                 className="text-slate-400 font-semibold text-lg"

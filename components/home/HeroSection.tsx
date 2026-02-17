@@ -118,7 +118,7 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
             </motion.div>
           </motion.div>
 
-          {/* Right: Live Status glass card only (0-click utility) */}
+          {/* Right: Live Status glass card – prominent Open Until & Wait Time with green "Live" dot */}
           <motion.div
             variants={container}
             initial="hidden"
@@ -129,32 +129,36 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
               variants={item}
               className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl"
             >
-              <p className="text-sm font-semibold text-white/90 uppercase tracking-wider mb-4">
-                Live Status
-              </p>
+              <div className="flex items-center gap-2 mb-4">
+                <span
+                  className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse"
+                  aria-hidden
+                />
+                <p className="text-sm font-semibold text-white/90 uppercase tracking-wider">
+                  Live Status
+                </p>
+              </div>
               <div className="space-y-4">
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-slate-200">Current Wait Time</span>
-                    <span className="flex items-center gap-2 font-bold text-white">
+                    <span className="flex items-center gap-2 font-bold text-white text-lg">
                       <span
-                        className="h-2.5 w-2.5 rounded-full bg-red-500 shrink-0 animate-pulse"
+                        className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse"
                         aria-hidden
                       />
-                      15 mins
+                      <span className="status-pulse">15 mins</span>
                     </span>
                   </div>
                   {lastUpdated && (
-                    <p className="text-xs text-white/70">
-                      Last updated: {lastUpdated}
-                    </p>
+                    <p className="text-xs text-white/70">Last updated: {lastUpdated}</p>
                   )}
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-slate-200">Open Until</span>
-                  <span className="flex items-center gap-2 font-bold text-white">
+                  <span className="flex items-center gap-2 font-bold text-white text-lg">
                     <Clock className="h-5 w-5 text-white/80 shrink-0" aria-hidden />
-                    8:00 PM
+                    6:30 PM
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-4">
@@ -164,6 +168,13 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                     Accepted
                   </span>
                 </div>
+                <a
+                  href="tel:+13179566288"
+                  className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900"
+                  aria-label="Call (317) 956-6288"
+                >
+                  Call (317) 956-6288
+                </a>
               </div>
             </motion.div>
           </motion.div>

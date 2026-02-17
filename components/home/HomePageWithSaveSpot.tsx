@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { HeroSection } from "@/components/home/HeroSection";
 import { TrustSignals } from "@/components/home/TrustSignals";
@@ -10,8 +10,19 @@ import { ClinicMap } from "@/components/ui/ClinicMap";
 import { DivisionCards } from "@/components/clinic/DivisionCards";
 import { PrimaryCareBridge } from "@/components/sections/PrimaryCareBridge";
 import { SaveSpotModal } from "@/components/SaveSpotModal";
+import { FloatingActionButton } from "@/components/home/FloatingActionButton";
 
-export function HomePageWithSaveSpot() {
+type Props = {
+  insertAfterHero?: ReactNode;
+  insertBeforeMain?: ReactNode;
+  bottomSections?: ReactNode;
+};
+
+export function HomePageWithSaveSpot({
+  insertAfterHero,
+  insertBeforeMain,
+  bottomSections,
+}: Props = {}) {
   const [saveSpotModalOpen, setSaveSpotModalOpen] = useState(false);
 
   return (
@@ -21,7 +32,9 @@ export function HomePageWithSaveSpot() {
         isOpen={saveSpotModalOpen}
         onClose={() => setSaveSpotModalOpen(false)}
       />
-
+      <FloatingActionButton onSaveSpotClick={() => setSaveSpotModalOpen(true)} />
+      {insertAfterHero}
+      {insertBeforeMain}
       <TrustSignals />
       <section className="container py-12 md:py-16">
         <TriageToggle />
@@ -52,6 +65,14 @@ export function HomePageWithSaveSpot() {
               <p className="text-slate-500 text-sm mt-4">
                 Located near the intersection of N. Michigan Rd and 79th St
               </p>
+              <a
+                href="https://www.google.com/maps/dir//7911+N+Michigan+Rd,+Indianapolis,+IN+46268"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 mt-4 min-h-[44px] px-6 py-3 rounded-xl bg-teal-600 text-white font-semibold hover:bg-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+              >
+                Get Directions
+              </a>
             </div>
             <div className="relative aspect-video md:aspect-[4/3] rounded-xl overflow-hidden border border-slate-200 shadow-medical">
               <Image
@@ -93,6 +114,7 @@ export function HomePageWithSaveSpot() {
       <DivisionCards />
 
       <PrimaryCareBridge />
+      {bottomSections}
     </>
   );
 }

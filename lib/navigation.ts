@@ -42,7 +42,7 @@ export const patientServices = [
 
 export const resourceLinks = [
   { name: "Patient Forms", href: "/resources/forms" },
-  { name: "Patient & Employer Forms (PDFs)", href: "/resources/patient-forms" },
+  { name: "Patient Portal (MyMedicalLocker)", href: "/resources/patient-portal" },
   { name: "Flu Season FAQ", href: "/resources/flu-faq" },
   { name: "Urgent Care vs ER", href: "/resources/urgent-care-vs-er" },
   { name: "Pricing", href: "/patient-resources/pricing" },

@@ -31,8 +31,15 @@ export function Footer() {
               <Plus className="h-5 w-5 text-accent-red" aria-hidden />
               <span>UrgentCare Indy</span>
             </Link>
-            <address className="not-italic text-slate-300 text-sm space-y-1">
-              <p>7911 N Michigan Rd, Indianapolis, IN 46268</p>
+            <address className="not-italic text-slate-300 text-sm space-y-1 flex flex-col">
+              <a
+                href="https://www.google.com/maps/dir//7911+N+Michigan+Rd,+Indianapolis,+IN+46268"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-offset-2 focus:ring-offset-slate-900 rounded"
+              >
+                7911 N Michigan Rd, Indianapolis, IN 46268
+              </a>
               <a
                 href="tel:3179566288"
                 className="text-white hover:text-primary-light transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-offset-2 focus:ring-offset-slate-900 rounded"

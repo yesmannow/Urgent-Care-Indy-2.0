@@ -8,6 +8,14 @@ export interface FormDownloadCardProps {
   note?: string;
 }
 
+/** Use for form list data when rendering FormDownloadCard. Pass note={form.note ?? undefined} to satisfy strict typing. */
+export interface PatientForm {
+  name: string;
+  description: string;
+  fileUrl: string;
+  note?: string;
+}
+
 export function FormDownloadCard({
   title,
   description,

@@ -41,8 +41,8 @@ export function CorporateQuote() {
 
   if (submitted) {
     return (
-      <div className="bg-white shadow-xl rounded-xl p-8 border-t-4 border-primary-blue">
-        <p className="text-green-700 font-medium text-center py-4">
+      <div className="bg-white shadow-xl rounded-3xl p-8 border-t-4 border-teal-500">
+        <p className="text-teal-700 font-medium text-center py-4">
           Thanks! Our Account Manager will call you within 24 hours.
         </p>
       </div>
@@ -52,9 +52,9 @@ export function CorporateQuote() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow-xl rounded-xl p-8 border-t-4 border-primary-blue"
+      className="bg-white shadow-xl rounded-3xl p-8 border-t-4 border-teal-500"
     >
-      <h3 className="text-xl font-bold text-slate-900 mb-6">
+      <h3 className="text-xl font-bold text-slate-900 mb-6 sr-only">
         Request Corporate Rates
       </h3>
       <div className="space-y-4">
@@ -69,7 +69,7 @@ export function CorporateQuote() {
             value={data.companyName}
             onChange={handleChange}
             required
-            className="w-full min-h-[44px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
+            className="w-full min-h-[44px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
             placeholder="Acme Corp"
           />
         </div>
@@ -84,7 +84,7 @@ export function CorporateQuote() {
             value={data.hrContactName}
             onChange={handleChange}
             required
-            className="w-full min-h-[44px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
+            className="w-full min-h-[44px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
             placeholder="Jane Smith"
           />
         </div>
@@ -99,7 +99,7 @@ export function CorporateQuote() {
             value={data.email}
             onChange={handleChange}
             required
-            className="w-full min-h-[44px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
+            className="w-full min-h-[44px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
             placeholder="hr@company.com"
           />
         </div>
@@ -114,7 +114,7 @@ export function CorporateQuote() {
             value={data.phone}
             onChange={handleChange}
             required
-            className="w-full min-h-[44px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
+            className="w-full min-h-[44px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
             placeholder="(317) 555-0123"
           />
         </div>
@@ -129,14 +129,14 @@ export function CorporateQuote() {
             value={data.employeeCount}
             onChange={handleChange}
             required
-            className="w-full min-h-[44px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
+            className="w-full min-h-[44px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
             placeholder="e.g. 50–200"
           />
         </div>
       </div>
       <button
         type="submit"
-        className="w-full mt-4 min-h-[44px] rounded-xl bg-primary-blue text-white font-bold shadow-medical hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-offset-2"
+        className="w-full mt-4 min-h-[44px] rounded-xl bg-teal-500 text-white font-bold shadow-medical hover:bg-teal-600 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
       >
         Get a Quote
       </button>

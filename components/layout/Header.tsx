@@ -166,10 +166,12 @@ export function Header() {
           {/* Right: Portal + CTA on desktop; Mobile nav trigger on mobile */}
           <div className="flex items-center gap-4 shrink-0">
             <Link
-              href="/portal"
+              href="https://www.mymedicallocker.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden md:inline text-sm text-slate-500 hover:text-slate-700 transition-colors"
             >
-              Portal Login
+              Login to Portal
             </Link>
             <Link
               href="/schedule"

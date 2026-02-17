@@ -42,7 +42,7 @@ const servicesMobileSections = [
       { name: "EKG Services", href: "/services/diagnostics#ekg" },
       { name: "Vaccines & Shots", href: "/services/prevention#vaccines" },
       { name: "STI Screening", href: "/services/prevention#sti" },
-      { name: "Patient Forms", href: "/resources/patient-forms" },
+      { name: "Patient Forms", href: "/resources/forms" },
     ],
   },
 ];
@@ -240,13 +240,15 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                 </div>
 
                 <div className="pt-4 space-y-2">
-                  <Link
-                    href="/portal"
-                    className="block py-3 text-slate-600 text-sm"
+                  <a
+                    href="https://www.mymedicallocker.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block py-3 text-slate-600 text-sm hover:text-teal-600 transition-colors"
                     onClick={handleLinkClick}
                   >
-                    Portal Login
-                  </Link>
+                    Login to Portal
+                  </a>
                   <Link
                     href="/schedule"
                     className="block w-full text-center bg-primary-blue text-white rounded-full px-5 py-3 font-bold hover:bg-blue-700 transition-colors shadow-medical"

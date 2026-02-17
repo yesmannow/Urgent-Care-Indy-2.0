@@ -36,7 +36,7 @@ const menuData = [
       { name: "EKG Services", href: "/services/diagnostics#ekg" },
       { name: "Vaccines & Shots", href: "/services/prevention#vaccines" },
       { name: "STI Screening", href: "/services/prevention#sti" },
-      { name: "Patient Forms", href: "/resources/patient-forms" },
+      { name: "Patient Forms", href: "/resources/forms" },
     ],
   },
 ];
