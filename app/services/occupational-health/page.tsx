@@ -67,10 +67,13 @@ export default function OccupationalHealthPage() {
           Services
         </h2>
         <ul className="space-y-6">
-          {SERVICES.map(({ title, price, note, icon: Icon, description }) => (
+          {SERVICES.map(({ title, price, note, icon: Icon, description }, i) => {
+            const id = ["dot-physicals", "drug-screens", "workers-comp"][i];
+            return (
             <li
               key={title}
-              className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden"
+              id={id}
+              className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden scroll-mt-24"
             >
               <div className="p-6 md:p-8 flex flex-col sm:flex-row sm:items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-700">
@@ -98,7 +101,8 @@ export default function OccupationalHealthPage() {
                 </div>
               </div>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </section>
 

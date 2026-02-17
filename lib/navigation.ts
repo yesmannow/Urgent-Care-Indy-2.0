@@ -35,6 +35,7 @@ export const patientServices = [
     icon: "FileText",
     links: [
       { name: "Patient Forms", href: "/resources/forms" },
+      { name: "Pricing", href: "/patient-resources/pricing" },
     ],
   },
 ] as const;
@@ -42,6 +43,35 @@ export const patientServices = [
 export const resourceLinks = [
   { name: "Patient Forms", href: "/resources/forms" },
   { name: "Insurance Guide", href: "/payments-insurance" },
-  { name: "Pricing", href: "/patient-resources/pricing" },
-  { name: "Occupational Health", href: "/services/occupational-health" },
+] as const;
+
+// Employer Services mega menu – Occupational Health + Portal
+export const employerServices = [
+  {
+    id: "dot-physicals",
+    title: "DOT Physicals",
+    price: "$95",
+    note: "Certified Providers",
+    description:
+      "FMCSA-certified medical examinations for commercial drivers. Fast turnaround, clear documentation for your fleet.",
+    href: "/services/occupational-health#dot-physicals",
+  },
+  {
+    id: "drug-screens",
+    title: "Drug Screens",
+    price: null,
+    note: "5-panel, 10-panel, eScreen",
+    description:
+      "Pre-employment, post-accident, and random testing. Chain-of-custody assured. DOT and non-DOT panels available.",
+    href: "/services/occupational-health#drug-screens",
+  },
+  {
+    id: "workers-comp",
+    title: "Workers Comp Injury Management",
+    price: null,
+    note: "Return-to-Work focus",
+    description:
+      "On-site evaluation, imaging, and treatment. We prioritize timely care and clear work-status documentation.",
+    href: "/services/occupational-health#workers-comp",
+  },
 ] as const;

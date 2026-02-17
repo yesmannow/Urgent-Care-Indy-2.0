@@ -13,7 +13,7 @@ import {
   FileText,
   type LucideIcon,
 } from "lucide-react";
-import { patientServices, resourceLinks } from "@/lib/navigation";
+import { patientServices, resourceLinks, employerServices } from "@/lib/navigation";
 
 const iconMap: Record<(typeof patientServices)[number]["icon"], LucideIcon> = {
   Stethoscope,
@@ -28,16 +28,24 @@ type MobileNavProps = {
   onClose: () => void;
 };
 
+const EMPLOYER_ACCORDION_KEY = "Employer Services";
+
 export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [employerExpanded, setEmployerExpanded] = useState(false);
 
   const toggleCategory = (category: string) => {
     setExpandedCategory((prev) => (prev === category ? null : category));
   };
 
+  const toggleEmployer = () => {
+    setEmployerExpanded((prev) => !prev);
+  };
+
   const handleLinkClick = () => {
     onClose();
     setExpandedCategory(null);
+    setEmployerExpanded(false);
   };
 
   return (
@@ -158,12 +166,76 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                   })}
                 </div>
 
+                {/* Accordion: Employer Services */}
+                <div className="border-b border-slate-100">
+                  <button
+                    type="button"
+                    onClick={toggleEmployer}
+                    className="flex items-center justify-between w-full py-3 text-left text-slate-700 font-medium"
+                    aria-expanded={employerExpanded}
+                    aria-controls="mobile-employer-accordion"
+                    id="mobile-employer-trigger"
+                  >
+                    <span>{EMPLOYER_ACCORDION_KEY}</span>
+                    <ChevronDown
+                      className={`h-5 w-5 text-slate-400 shrink-0 transition-transform ${employerExpanded ? "rotate-180" : ""}`}
+                      aria-hidden
+                    />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {employerExpanded && (
+                      <motion.div
+                        id="mobile-employer-accordion"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                        role="region"
+                        aria-labelledby="mobile-employer-trigger"
+                      >
+                        <ul className="pb-3 pl-4 space-y-2">
+                          {employerServices.map(({ title, href }) => (
+                            <li key={href}>
+                              <Link
+                                href={href}
+                                className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5"
+                                onClick={handleLinkClick}
+                              >
+                                {title}
+                              </Link>
+                            </li>
+                          ))}
+                          <li>
+                            <Link
+                              href="/services/occupational-health"
+                              className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5"
+                              onClick={handleLinkClick}
+                            >
+                              Occupational Health (full page)
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              href="/portal"
+                              className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5 font-medium"
+                              onClick={handleLinkClick}
+                            >
+                              Portal Login
+                            </Link>
+                          </li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <Link
                   href="/employer-services"
                   className="block py-3 text-slate-700 font-medium border-b border-slate-100"
                   onClick={handleLinkClick}
                 >
-                  Employer Services
+                  Employer Services (overview)
                 </Link>
 
                 {/* Resources */}
