@@ -20,6 +20,9 @@
 # production
 /build
 
+# leftover nested folder (delete manually when no process is using it)
+/urgent-care-indy
+
 # misc
 .DS_Store
 *.pem
