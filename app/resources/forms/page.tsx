@@ -3,18 +3,12 @@ import Link from "next/link";
 import { FileText, Truck, Activity, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Patient Forms & Registration | Urgent Care Indy",
+  title: "Patient Resources & Registration | Urgent Care Indy",
   description:
     "New patient registration, DOT physical pre-registration, sports physical form. Complete online before your visit.",
 };
 
 const formCards = [
-  {
-    title: "New Patient Registration",
-    description: "Complete your intake before your first visit.",
-    href: "/resources/forms/patient-intake",
-    icon: FileText,
-  },
   {
     title: "DOT Physical Form",
     description: "Pre-register for your commercial driver medical exam.",
@@ -27,6 +21,12 @@ const formCards = [
     href: "/resources/forms/sports-physical",
     icon: Activity,
   },
+  {
+    title: "New Patient Registration",
+    description: "Complete your intake before your first visit.",
+    href: "/resources/forms/patient-intake",
+    icon: FileText,
+  },
 ];
 
 export default function FormsIndexPage() {
@@ -35,7 +35,7 @@ export default function FormsIndexPage() {
       <div className="container px-4 py-12 md:py-16 max-w-5xl mx-auto">
         <header className="mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-            Patient Forms & Registration
+            Patient Resources & Registration
           </h1>
           <p className="mt-2 text-lg text-slate-600">
             Complete the right form online before your visit to save time.
