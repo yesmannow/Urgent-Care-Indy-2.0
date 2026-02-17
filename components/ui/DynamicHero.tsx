@@ -7,18 +7,21 @@ const FALLBACK_IMAGE =
   "/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (6).jpg";
 
 type DynamicHeroProps = {
-  query: string;
+  query?: string;
   title: string;
   subtitle?: string;
+  /** When provided, use this image and skip Pexels fetch (e.g. local employer hero). */
+  imageSrc?: string;
 };
 
 export async function DynamicHero({
-  query,
+  query = "medical",
   title,
   subtitle,
+  imageSrc,
 }: DynamicHeroProps) {
-  const pexelsUrl = await getPexelsImageUrl(query, { orientation: "landscape" });
-  const src = pexelsUrl ?? FALLBACK_IMAGE;
+  const pexelsUrl = imageSrc ? null : await getPexelsImageUrl(query, { orientation: "landscape" });
+  const src = imageSrc ?? pexelsUrl ?? FALLBACK_IMAGE;
 
   return (
     <section

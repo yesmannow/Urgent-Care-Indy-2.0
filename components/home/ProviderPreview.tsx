@@ -48,7 +48,7 @@ export function ProviderPreview() {
           </Link>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {providers.map((p, i) => (
+          {providers.map((p) => (
             <div
               key={p.name}
               className="group bg-slate-50 rounded-[2.5rem] overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-500"

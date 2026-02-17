@@ -16,10 +16,13 @@ export function AirQualityAlert() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const wasDismissed = typeof window !== "undefined" && sessionStorage.getItem(DISMISS_KEY) === "true";
+    const wasDismissed =
+      typeof window !== "undefined" && sessionStorage.getItem(DISMISS_KEY) === "true";
     if (wasDismissed) {
-      setDismissed(true);
-      setLoading(false);
+      Promise.resolve().then(() => {
+        setDismissed(true);
+        setLoading(false);
+      });
       return;
     }
 

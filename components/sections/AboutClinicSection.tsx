@@ -24,12 +24,6 @@ const coreValues = [
   },
 ];
 
-const valueQueries = [
-  "medical teamwork",
-  "ethical doctor",
-  "high-quality medical care",
-];
-
 export async function AboutClinicSection() {
   const [featureUrl, ...valueUrls] = await Promise.all([
     getPexelsImageUrl("doctor smiling with patient in modern clinic", {

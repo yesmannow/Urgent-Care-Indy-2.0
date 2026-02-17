@@ -45,6 +45,7 @@ export const resourceLinks = [
   { name: "Patient Portal (MyMedicalLocker)", href: "/resources/patient-portal" },
   { name: "Flu Season FAQ", href: "/resources/flu-faq" },
   { name: "Urgent Care vs ER", href: "/resources/urgent-care-vs-er" },
+  { name: "Should I Come In? (Quiz)", href: "/resources/should-i-come-in" },
   { name: "Pricing", href: "/patient-resources/pricing" },
   { name: "Insurance Guide", href: "/payments-insurance" },
 ] as const;

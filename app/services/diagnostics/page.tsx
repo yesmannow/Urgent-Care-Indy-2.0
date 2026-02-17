@@ -2,6 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { DynamicHero } from "@/components/ui/DynamicHero";
 import { ServiceDetailSection } from "@/components/sections/ServiceDetailSection";
+import { InsurancePricingSection } from "@/components/sections/InsurancePricingSection";
+import { StickySubNav } from "@/components/ui/StickySubNav";
+import { ScrollRevealSection } from "@/components/ui/ScrollRevealSection";
+
+const DIAGNOSTICS_NAV_LINKS = [
+  { label: "Labs", href: "#labs" },
+  { label: "EKG", href: "#ekg" },
+  { label: "Pricing", href: "#insurance-pricing" },
+];
 
 const gallery = [
   {
@@ -10,14 +19,14 @@ const gallery = [
     caption: "On-Site Vitals",
   },
   {
+    src: "/images/employers/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg",
+    alt: "On-site laboratory testing",
+    caption: "Labs & Testing",
+  },
+  {
     src: "/images/services/diagnostics/rapid%20lab%20test.jpg",
     alt: "Rapid strep and flu testing",
     caption: "Rapid Strep & Flu Tests",
-  },
-  {
-    src: "/images/services/diagnostics/thermometer1.jpg",
-    alt: "Temperature and fever screening",
-    caption: "Temperature & Fever Screening",
   },
 ];
 
@@ -29,7 +38,6 @@ export default function DiagnosticsPage() {
         title="Advanced Diagnostics"
         subtitle="On-site labs, X-ray, and rapid testing to get you answers quickly."
       />
-      {/* Triage banner: reduce interior-page bounce */}
       <div
         className="bg-slate-900 text-white py-3 px-4 text-center text-sm"
         role="region"
@@ -41,31 +49,34 @@ export default function DiagnosticsPage() {
             href="https://symptomate.com/interview/0"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-blue-300 hover:text-blue-200 underline focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900 rounded"
+            className="font-semibold text-teal-300 hover:text-teal-200 underline focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-slate-900 rounded"
           >
             Check your symptoms for free
           </a>
           {" "}or{" "}
           <Link
             href="/patient-resources/pricing"
-            className="font-semibold text-blue-300 hover:text-blue-200 underline focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900 rounded"
+            className="font-semibold text-teal-300 hover:text-teal-200 underline focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-slate-900 rounded"
           >
             view our transparent pricing
           </Link>
           .
         </p>
       </div>
-      <div className="container py-12 md:py-16 max-w-5xl">
-        <section
-          className="mb-12"
-          aria-labelledby="gallery-heading"
-        >
-          <h2 id="gallery-heading" className="text-xl font-bold text-slate-900 mb-6">
+
+      <StickySubNav links={DIAGNOSTICS_NAV_LINKS} label="Diagnostics sections" />
+
+      <div className="container py-12 md:py-16 max-w-6xl">
+        <ScrollRevealSection className="mb-12">
+          <h2 id="gallery-heading" className="text-2xl font-bold text-slate-900 mb-6">
             Services Gallery
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {gallery.map(({ src, alt, caption }) => (
-              <figure key={caption} className="rounded-xl overflow-hidden shadow-medical bg-white border border-slate-200">
+              <figure
+                key={caption}
+                className="rounded-3xl overflow-hidden shadow-lg bg-white border border-slate-200"
+              >
                 <div className="relative aspect-[4/3]">
                   <Image
                     src={src}
@@ -81,36 +92,50 @@ export default function DiagnosticsPage() {
               </figure>
             ))}
           </div>
-        </section>
+        </ScrollRevealSection>
 
-        <ServiceDetailSection
-          id="labs"
-          title="On-Site Labs"
-          description="Skip the wait for outside labs. We process critical tests in-house so you get answers during your visit. Results in minutes for Strep, Flu, Mono, and Urinalysis—no waiting for an outside lab."
-          items={[
-            "Rapid Strep A — results in minutes",
-            "Influenza A & B — results in minutes",
-            "Mononucleosis — results in minutes",
-            "Urinalysis — same-visit results",
-            "Glucose levels",
-            "Pregnancy tests (HCG)",
-          ]}
-          ctaText="Call 317-956-6288"
-        />
+        <ScrollRevealSection>
+          <ServiceDetailSection
+            id="labs"
+            title="On-Site Labs"
+            description="Skip the wait for outside labs. We process critical tests in-house so you get answers during your visit. Results in minutes for Strep, Flu, Mono, and Urinalysis—no waiting for an outside lab."
+            items={[
+              "Rapid Strep A — results in minutes",
+              "Influenza A & B — results in minutes",
+              "Mononucleosis — results in minutes",
+              "Urinalysis — same-visit results",
+              "Glucose levels",
+              "Pregnancy tests (HCG)",
+            ]}
+            ctaText="Call 317-956-6288"
+          />
+        </ScrollRevealSection>
 
-        <ServiceDetailSection
-          id="ekg"
-          title="EKG Services"
-          description="We provide resting electrocardiograms (EKG/ECG) to monitor heart health and evaluate chest pain or shortness of breath. Immediate physician interpretation so you leave with clarity."
-          items={[
-            "Immediate physician interpretation for chest pain or heart health",
-            "Digital results for your primary care",
-            "Non-invasive 12-lead testing",
-          ]}
-          ctaText="Call 317-956-6288"
-        />
+        <ScrollRevealSection>
+          <ServiceDetailSection
+            id="ekg"
+            title="EKG Services"
+            description="We provide resting electrocardiograms (EKG/ECG) to monitor heart health and evaluate chest pain or shortness of breath. Immediate physician interpretation so you leave with clarity."
+            items={[
+              "Immediate physician interpretation for chest pain or heart health",
+              "Digital results for your primary care",
+              "Non-invasive 12-lead testing",
+            ]}
+            ctaText="Call 317-956-6288"
+          />
+        </ScrollRevealSection>
+      </div>
 
-        <Link href="/services" className="text-primary-blue font-medium hover:underline inline-block mt-8">
+      <InsurancePricingSection
+        servicePrice="$100"
+        pricingCtaText="View Full Pricing Menu"
+      />
+
+      <div className="container max-w-6xl py-8">
+        <Link
+          href="/services"
+          className="text-teal-600 font-semibold hover:text-teal-700 hover:underline focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded"
+        >
           ← All services
         </Link>
       </div>

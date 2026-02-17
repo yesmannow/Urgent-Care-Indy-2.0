@@ -22,12 +22,8 @@ export function Footer() {
     <footer className="bg-slate-900 text-white py-12">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-8">
-          {/* Brand: Logo + Address + Phone */}
           <div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 font-bold text-white mb-4"
-            >
+            <Link href="/" className="inline-flex items-center gap-2 font-bold text-white mb-4">
               <Plus className="h-5 w-5 text-accent-red" aria-hidden />
               <span>UrgentCare Indy</span>
             </Link>
@@ -49,16 +45,12 @@ export function Footer() {
             </address>
           </div>
 
-          {/* Services */}
           <div>
             <h3 className="font-semibold text-white mb-4">Services</h3>
             <ul className="space-y-2">
               {serviceLinks.map(({ href, label }) => (
                 <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-slate-300 hover:text-white transition-colors text-sm"
-                  >
+                  <Link href={href} className="text-slate-300 hover:text-white transition-colors text-sm">
                     {label}
                   </Link>
                 </li>
@@ -66,7 +58,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
@@ -82,10 +73,7 @@ export function Footer() {
                       {label}
                     </a>
                   ) : (
-                    <Link
-                      href={href}
-                      className="text-slate-300 hover:text-white transition-colors text-sm"
-                    >
+                    <Link href={href} className="text-slate-300 hover:text-white transition-colors text-sm">
                       {label}
                     </Link>
                   )}
@@ -94,26 +82,24 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Hours – highlighted */}
           <div>
             <h3 className="font-semibold text-white mb-4">Hours</h3>
             <p className="text-slate-300 text-sm">
-              <span className="text-white font-medium">
-                Mon–Fri: 8am–6:30pm | Sat: 8am–2:30pm
-              </span>
+              <span className="text-white font-medium">Mon-Fri: 8am-6:30pm | Sat: 8am-2:30pm</span>
             </p>
           </div>
 
-          {/* Location: small map */}
           <div>
             <h3 className="font-semibold text-white mb-4">Location</h3>
-            <Link href="/contact" className="block rounded-lg overflow-hidden shadow-md focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900">
+            <Link
+              href="/contact"
+              className="block rounded-lg overflow-hidden shadow-md focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900"
+            >
               <ClinicMap className="h-[150px] w-full" />
             </Link>
           </div>
         </div>
 
-        {/* Bottom: Copyright + HIPAA */}
         <div className="mt-10 pt-8 border-t border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-sm">
           <p>© {new Date().getFullYear()} Urgent Care Indy. All rights reserved.</p>
           <p className="font-medium text-slate-300">HIPAA Compliant</p>

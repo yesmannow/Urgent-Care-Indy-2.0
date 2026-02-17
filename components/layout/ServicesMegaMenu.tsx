@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Stethoscope,
@@ -46,6 +47,8 @@ type ServicesMegaMenuProps = {
   onClose: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  id?: string;
+  autoFocus?: boolean;
 };
 
 export function ServicesMegaMenu({
@@ -53,15 +56,26 @@ export function ServicesMegaMenu({
   onClose,
   onMouseEnter,
   onMouseLeave,
+  id,
+  autoFocus = false,
 }: ServicesMegaMenuProps) {
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!isOpen || !autoFocus) return;
+    const firstLink = menuRef.current?.querySelector<HTMLAnchorElement>("a[href]");
+    firstLink?.focus();
+  }, [autoFocus, isOpen]);
+
   if (!isOpen) return null;
 
   return (
     <div
+      ref={menuRef}
+      id={id}
       className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-[min(96vw,640px)] rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-lg py-6 px-6 z-50"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave ?? onClose}
-      role="menu"
       aria-label="Services"
     >
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
