@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Clock, CheckCircle } from "lucide-react";
 
-const HERO_IMAGE = "/images/clinic/providers/chase-keirn.webp";
+const HERO_IMAGE = "/images/services/urgent-care/tamimt9b-doctor-9964865_1280.jpg";
 
 const container = {
   hidden: { opacity: 0 },
@@ -54,7 +54,7 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
       <div className="absolute inset-0 z-0">
         <Image
           src={HERO_IMAGE}
-          alt="Chase Keirn, PA-C at Urgent Care Indy"
+          alt="Medical professional in blue scrubs writing on a clipboard with a stethoscope"
           fill
           className="object-cover object-center"
           priority

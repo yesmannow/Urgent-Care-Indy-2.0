@@ -1,39 +1,10 @@
 import Image from "next/image";
 import { MapPin } from "lucide-react";
-import type { PexelsSearchResponse } from "@/types/pexels";
+import { getPexelsImageUrl } from "@/lib/pexels";
+import { HeroStatusTicker } from "@/components/ui/HeroStatusTicker";
 
 const FALLBACK_IMAGE =
   "/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (6).jpg";
-const PEXELS_API = "https://api.pexels.com/v1/search";
-
-async function fetchPexelsPhoto(query: string): Promise<string | null> {
-  const apiKey = process.env.PEXELS_API_KEY;
-  if (!apiKey) {
-    if (process.env.NODE_ENV !== "test") {
-      console.warn(
-        "[DynamicHero] PEXELS_API_KEY is not set. Using fallback image."
-      );
-    }
-    return null;
-  }
-
-  try {
-    const res = await fetch(
-      `${PEXELS_API}?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`,
-      {
-        headers: { Authorization: apiKey },
-        next: { revalidate: 3600 },
-      }
-    );
-    if (!res.ok) return null;
-    const data: PexelsSearchResponse = await res.json();
-    const photo = data.photos?.[0];
-    if (!photo?.src?.landscape) return null;
-    return photo.src.landscape;
-  } catch {
-    return null;
-  }
-}
 
 type DynamicHeroProps = {
   query: string;
@@ -46,7 +17,7 @@ export async function DynamicHero({
   title,
   subtitle,
 }: DynamicHeroProps) {
-  const pexelsUrl = await fetchPexelsPhoto(query);
+  const pexelsUrl = await getPexelsImageUrl(query, { orientation: "landscape" });
   const src = pexelsUrl ?? FALLBACK_IMAGE;
 
   return (
@@ -78,6 +49,7 @@ export async function DynamicHero({
           )}
         </div>
       </div>
+      <HeroStatusTicker />
       {/* Watermark: local clinic anchor */}
       <div
         className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 rounded-lg bg-black/40 px-3 py-1.5 text-xs font-medium text-white/90 backdrop-blur-sm"

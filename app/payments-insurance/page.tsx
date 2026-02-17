@@ -23,7 +23,7 @@ export default function PaymentsInsurancePage() {
 
         <InsuranceSection />
 
-        {/* Self-Pay Rates */}
+        {/* Self-Pay Pricing – summary + link to full tiers */}
         <section
           className="mt-12 bg-white rounded-2xl shadow-sm border border-slate-100 p-8"
           aria-labelledby="self-pay-heading"
@@ -32,12 +32,22 @@ export default function PaymentsInsurancePage() {
             id="self-pay-heading"
             className="text-2xl font-bold text-slate-900 mb-4"
           >
-            Self-Pay Rates
+            Self-Pay Pricing
           </h2>
+          <p className="text-slate-600 leading-relaxed mb-4">
+            No insurance? No problem. We offer affordable self-pay rates for
+            office visits and common services. Office visits start at $100 for
+            common conditions and injuries (Level 1); tiered pricing applies for
+            suturing, STI visits, pelvic exams, and more. Ask our front desk for
+            a Good Faith Estimate before your visit.
+          </p>
           <p className="text-slate-600 leading-relaxed">
-            No insurance? No problem. We offer discounted rates for payment at
-            time of service. Ask our front desk for a &ldquo;Good Faith
-            Estimate&rdquo;.
+            <Link
+              href="/patient-resources/pricing#self-pay-tiers"
+              className="text-primary-blue font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 rounded"
+            >
+              View full self-pay tiers and fixed-price services →
+            </Link>
           </p>
         </section>
 

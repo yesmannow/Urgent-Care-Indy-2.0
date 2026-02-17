@@ -4,78 +4,48 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
-import { MegaMenu } from "./MegaMenu";
-import { EmployerMegaMenu } from "./EmployerMegaMenu";
+import { ServicesMegaMenu } from "./ServicesMegaMenu";
 import { MobileNav } from "./MobileNav";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { resourceLinks } from "@/lib/navigation";
 
 const navLinks = [
   { href: "/our-clinic", label: "Our Clinic" },
-  { href: "/patient-services", label: "Patient Services", hasMegaMenu: true },
-  { href: "/employer-services", label: "Employer Services", hasEmployerMegaMenu: true },
+  { href: "/services", label: "Services", hasServicesMega: true },
   { href: "#", label: "Resources", hasResourcesDropdown: true },
 ];
 
 const MEGA_MENU_LEAVE_DELAY_MS = 150;
 
 export function Header() {
-  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
-  const [employerMegaMenuOpen, setEmployerMegaMenuOpen] = useState(false);
+  const [servicesMegaOpen, setServicesMegaOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const megaMenuCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const employerMegaMenuCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const servicesMegaCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resourcesCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const openMegaMenu = () => {
-    if (megaMenuCloseTimeoutRef.current) {
-      clearTimeout(megaMenuCloseTimeoutRef.current);
-      megaMenuCloseTimeoutRef.current = null;
+  const openServicesMega = () => {
+    if (servicesMegaCloseTimeoutRef.current) {
+      clearTimeout(servicesMegaCloseTimeoutRef.current);
+      servicesMegaCloseTimeoutRef.current = null;
     }
-    setEmployerMegaMenuOpen(false);
     setResourcesOpen(false);
-    setMegaMenuOpen(true);
+    setServicesMegaOpen(true);
   };
 
-  const openEmployerMegaMenu = () => {
-    if (employerMegaMenuCloseTimeoutRef.current) {
-      clearTimeout(employerMegaMenuCloseTimeoutRef.current);
-      employerMegaMenuCloseTimeoutRef.current = null;
-    }
-    setMegaMenuOpen(false);
-    setResourcesOpen(false);
-    setEmployerMegaMenuOpen(true);
-  };
-
-  const closeEmployerMegaMenuDelayed = () => {
-    employerMegaMenuCloseTimeoutRef.current = setTimeout(() => {
-      setEmployerMegaMenuOpen(false);
-      employerMegaMenuCloseTimeoutRef.current = null;
+  const closeServicesMegaDelayed = () => {
+    servicesMegaCloseTimeoutRef.current = setTimeout(() => {
+      setServicesMegaOpen(false);
+      servicesMegaCloseTimeoutRef.current = null;
     }, MEGA_MENU_LEAVE_DELAY_MS);
   };
 
-  const closeEmployerMegaMenu = () => {
-    if (employerMegaMenuCloseTimeoutRef.current) {
-      clearTimeout(employerMegaMenuCloseTimeoutRef.current);
-      employerMegaMenuCloseTimeoutRef.current = null;
+  const closeServicesMega = () => {
+    if (servicesMegaCloseTimeoutRef.current) {
+      clearTimeout(servicesMegaCloseTimeoutRef.current);
+      servicesMegaCloseTimeoutRef.current = null;
     }
-    setEmployerMegaMenuOpen(false);
-  };
-
-  const closeMegaMenuDelayed = () => {
-    megaMenuCloseTimeoutRef.current = setTimeout(() => {
-      setMegaMenuOpen(false);
-      megaMenuCloseTimeoutRef.current = null;
-    }, MEGA_MENU_LEAVE_DELAY_MS);
-  };
-
-  const closeMegaMenu = () => {
-    if (megaMenuCloseTimeoutRef.current) {
-      clearTimeout(megaMenuCloseTimeoutRef.current);
-      megaMenuCloseTimeoutRef.current = null;
-    }
-    setMegaMenuOpen(false);
+    setServicesMegaOpen(false);
   };
 
   const openResources = () => {
@@ -83,8 +53,7 @@ export function Header() {
       clearTimeout(resourcesCloseTimeoutRef.current);
       resourcesCloseTimeoutRef.current = null;
     }
-    setMegaMenuOpen(false);
-    setEmployerMegaMenuOpen(false);
+    setServicesMegaOpen(false);
     setResourcesOpen(true);
   };
 
@@ -129,40 +98,21 @@ export function Header() {
             className="hidden md:flex items-center gap-8"
             aria-label="Main navigation"
           >
-            {navLinks.map(({ href, label, hasMegaMenu, hasEmployerMegaMenu, hasResourcesDropdown }) => {
-              if (hasMegaMenu) {
+            {navLinks.map(({ href, label, hasServicesMega, hasResourcesDropdown }) => {
+              if (hasServicesMega) {
                 return (
                   <div
                     key={label}
                     className="relative"
-                    onMouseEnter={openMegaMenu}
-                    onMouseLeave={closeMegaMenuDelayed}
+                    onMouseEnter={openServicesMega}
+                    onMouseLeave={closeServicesMegaDelayed}
                   >
                     <Link
                       href={href}
-                      className="text-sm font-medium text-slate-600 hover:text-primary-blue transition-colors"
+                      className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors inline-flex items-center gap-0.5"
                     >
                       {label}
-                    </Link>
-                  </div>
-                );
-              }
-              if (hasEmployerMegaMenu) {
-                return (
-                  <div
-                    key={label}
-                    className="relative"
-                    onMouseEnter={openEmployerMegaMenu}
-                    onMouseLeave={closeEmployerMegaMenuDelayed}
-                  >
-                    <Link
-                      href={href}
-                      className="text-sm font-medium text-slate-600 hover:text-primary-blue transition-colors inline-flex items-center gap-1.5"
-                    >
-                      {label}
-                      <span className="rounded-full bg-primary-blue/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-blue">
-                        B2B
-                      </span>
+                      <ChevronDown className="h-4 w-4 shrink-0" aria-hidden />
                     </Link>
                   </div>
                 );
@@ -236,22 +186,13 @@ export function Header() {
           </div>
         </div>
 
-        {/* Patient Services mega menu (desktop only) */}
-        <div className="hidden md:block">
-          <MegaMenu
-            isOpen={megaMenuOpen}
-            onClose={closeMegaMenu}
-            onMouseEnter={openMegaMenu}
-            onMouseLeave={closeMegaMenuDelayed}
-          />
-        </div>
-        {/* Employer Services mega menu (desktop only) */}
-        <div className="hidden md:block">
-          <EmployerMegaMenu
-            isOpen={employerMegaMenuOpen}
-            onClose={closeEmployerMegaMenu}
-            onMouseEnter={openEmployerMegaMenu}
-            onMouseLeave={closeEmployerMegaMenuDelayed}
+        {/* Services mega menu (desktop only) – no overflow-hidden so menu is not clipped */}
+        <div className="hidden md:block absolute left-0 right-0 top-full pt-0">
+          <ServicesMegaMenu
+            isOpen={servicesMegaOpen}
+            onClose={closeServicesMega}
+            onMouseEnter={openServicesMega}
+            onMouseLeave={closeServicesMegaDelayed}
           />
         </div>
       </div>

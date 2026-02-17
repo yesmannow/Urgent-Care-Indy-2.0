@@ -8,19 +8,44 @@ import {
   X,
   ChevronDown,
   Stethoscope,
+  Building2,
   Microscope,
-  HeartHandshake,
-  FileText,
-  type LucideIcon,
 } from "lucide-react";
-import { patientServices, resourceLinks, employerServices } from "@/lib/navigation";
+import { resourceLinks } from "@/lib/navigation";
 
-const iconMap: Record<(typeof patientServices)[number]["icon"], LucideIcon> = {
-  Stethoscope,
-  Microscope,
-  HeartHandshake,
-  FileText,
-};
+/** Matches ServicesMegaMenu structure for consistent nav */
+const servicesMobileSections = [
+  {
+    category: "Urgent Care",
+    icon: Stethoscope,
+    links: [
+      { name: "Minor Injuries", href: "/services/urgent-care#injuries" },
+      { name: "Minor Illnesses", href: "/services/urgent-care#illnesses" },
+      { name: "Sports Physicals", href: "/services/urgent-care" },
+    ],
+  },
+  {
+    category: "Employer Services",
+    icon: Building2,
+    links: [
+      { name: "DOT Physicals", href: "/employer-services#physicals" },
+      { name: "Drug Screening", href: "/employer-services#drug-testing" },
+      { name: "Workers' Comp", href: "/employer-services#workers-comp" },
+      { name: "Employer Overview", href: "/employer-services" },
+    ],
+  },
+  {
+    category: "Diagnostics & Prevention",
+    icon: Microscope,
+    links: [
+      { name: "On-Site Labs", href: "/services/diagnostics#labs" },
+      { name: "EKG Services", href: "/services/diagnostics#ekg" },
+      { name: "Vaccines & Shots", href: "/services/prevention#vaccines" },
+      { name: "STI Screening", href: "/services/prevention#sti" },
+      { name: "Patient Forms", href: "/resources/patient-forms" },
+    ],
+  },
+];
 
 type MobileNavProps = {
   isOpen: boolean;
@@ -28,29 +53,24 @@ type MobileNavProps = {
   onClose: () => void;
 };
 
-const EMPLOYER_ACCORDION_KEY = "Employer Services";
-
 export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
+  const [servicesExpanded, setServicesExpanded] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
-  const [employerExpanded, setEmployerExpanded] = useState(false);
+
+  const toggleServices = () => setServicesExpanded((prev) => !prev);
 
   const toggleCategory = (category: string) => {
     setExpandedCategory((prev) => (prev === category ? null : category));
   };
 
-  const toggleEmployer = () => {
-    setEmployerExpanded((prev) => !prev);
-  };
-
   const handleLinkClick = () => {
     onClose();
+    setServicesExpanded(false);
     setExpandedCategory(null);
-    setEmployerExpanded(false);
   };
 
   return (
     <>
-      {/* Hamburger trigger – visible only on mobile */}
       <button
         type="button"
         onClick={onOpen}
@@ -61,7 +81,6 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
         <Menu className="h-6 w-6" aria-hidden />
       </button>
 
-      {/* Slide-over drawer */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -106,133 +125,99 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                   Our Clinic
                 </Link>
 
-                {/* Accordion: Patient Services */}
-                <div className="border-b border-slate-100">
-                  <p className="py-3 text-slate-500 text-sm font-medium uppercase tracking-wide">
-                    Patient Services
-                  </p>
-                  {patientServices.map(({ category, icon, links }) => {
-                    const Icon = iconMap[icon];
-                    const isExpanded = expandedCategory === category;
-                    return (
-                      <div key={category} className="border-b border-slate-100 last:border-b-0">
-                        <button
-                          type="button"
-                          onClick={() => toggleCategory(category)}
-                          className="flex items-center justify-between w-full py-3 text-left text-slate-700 font-medium"
-                          aria-expanded={isExpanded}
-                          aria-controls={`mobile-accordion-${category.replace(/\s+/g, "-")}`}
-                          id={`mobile-accordion-trigger-${category.replace(/\s+/g, "-")}`}
-                        >
-                          <span className="flex items-center gap-2">
-                            <Icon className="h-5 w-5 text-primary-blue shrink-0" aria-hidden />
-                            {category}
-                          </span>
-                          <ChevronDown
-                            className={`h-5 w-5 text-slate-400 shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`}
-                            aria-hidden
-                          />
-                        </button>
-                        <AnimatePresence initial={false}>
-                          {isExpanded && (
-                            <motion.div
-                              id={`mobile-accordion-${category.replace(/\s+/g, "-")}`}
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
-                              role="region"
-                              aria-labelledby={`mobile-accordion-trigger-${category.replace(/\s+/g, "-")}`}
-                            >
-                              <ul className="pb-3 pl-7 space-y-2">
-                                {links.map(({ name, href }) => (
-                                  <li key={href}>
-                                    <Link
-                                      href={href}
-                                      className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5"
-                                      onClick={handleLinkClick}
-                                    >
-                                      {name}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Accordion: Employer Services */}
+                {/* Accordion: Services (Urgent Care, Employer, Diagnostics & Prevention) */}
                 <div className="border-b border-slate-100">
                   <button
                     type="button"
-                    onClick={toggleEmployer}
+                    onClick={toggleServices}
                     className="flex items-center justify-between w-full py-3 text-left text-slate-700 font-medium"
-                    aria-expanded={employerExpanded}
-                    aria-controls="mobile-employer-accordion"
-                    id="mobile-employer-trigger"
+                    aria-expanded={servicesExpanded}
+                    aria-controls="mobile-services-accordion"
+                    id="mobile-services-trigger"
                   >
-                    <span className="inline-flex items-center gap-1.5">
-                      {EMPLOYER_ACCORDION_KEY}
-                      <span className="rounded-full bg-primary-blue/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-blue">
-                        B2B
-                      </span>
-                    </span>
+                    <span>Services</span>
                     <ChevronDown
-                      className={`h-5 w-5 text-slate-400 shrink-0 transition-transform ${employerExpanded ? "rotate-180" : ""}`}
+                      className={`h-5 w-5 text-slate-400 shrink-0 transition-transform ${servicesExpanded ? "rotate-180" : ""}`}
                       aria-hidden
                     />
                   </button>
                   <AnimatePresence initial={false}>
-                    {employerExpanded && (
+                    {servicesExpanded && (
                       <motion.div
-                        id="mobile-employer-accordion"
+                        id="mobile-services-accordion"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                         role="region"
-                        aria-labelledby="mobile-employer-trigger"
+                        aria-labelledby="mobile-services-trigger"
                       >
-                        <ul className="pb-3 pl-4 space-y-2">
-                          {employerServices.map(({ title, href }) => (
-                            <li key={href}>
-                              <Link
-                                href={href}
-                                className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5"
-                                onClick={handleLinkClick}
-                              >
-                                {title}
-                              </Link>
-                            </li>
-                          ))}
-                          <li className="pt-2">
-                            <Link
-                              href="/portal"
-                              className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
-                              onClick={handleLinkClick}
-                            >
-                              B2B Portal
-                            </Link>
-                          </li>
-                        </ul>
+                        <div className="pb-3 pl-2">
+                          {servicesMobileSections.map(({ category, icon: Icon, links }) => {
+                            const isExpanded = expandedCategory === category;
+                            return (
+                              <div key={category} className="border-b border-slate-100 last:border-b-0">
+                                <button
+                                  type="button"
+                                  onClick={() => toggleCategory(category)}
+                                  className="flex items-center justify-between w-full py-3 text-left text-slate-600 font-medium text-sm"
+                                  aria-expanded={isExpanded}
+                                  aria-controls={`mobile-services-${category.replace(/\s+/g, "-")}`}
+                                  id={`mobile-services-trigger-${category.replace(/\s+/g, "-")}`}
+                                >
+                                  <span className="flex items-center gap-2">
+                                    <Icon className="h-4 w-4 text-teal-600 shrink-0" aria-hidden />
+                                    {category}
+                                  </span>
+                                  <ChevronDown
+                                    className={`h-4 w-4 text-slate-400 shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                                    aria-hidden
+                                  />
+                                </button>
+                                <AnimatePresence initial={false}>
+                                  {isExpanded && (
+                                    <motion.div
+                                      id={`mobile-services-${category.replace(/\s+/g, "-")}`}
+                                      initial={{ height: 0, opacity: 0 }}
+                                      animate={{ height: "auto", opacity: 1 }}
+                                      exit={{ height: 0, opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                      className="overflow-hidden"
+                                      role="region"
+                                      aria-labelledby={`mobile-services-trigger-${category.replace(/\s+/g, "-")}`}
+                                    >
+                                      <ul className="pb-3 pl-6 space-y-1">
+                                        {links.map(({ name, href }) => (
+                                          <li key={href}>
+                                            <Link
+                                              href={href}
+                                              className="text-sm text-slate-600 hover:text-teal-600 transition-colors block py-2"
+                                              onClick={handleLinkClick}
+                                            >
+                                              {name}
+                                            </Link>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </div>
+                            );
+                          })}
+                          <Link
+                            href="/schedule"
+                            className="mt-3 flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-teal-600 transition-colors"
+                            onClick={handleLinkClick}
+                          >
+                            Need a DOT Physical? Save Your Spot
+                          </Link>
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
-
-                <Link
-                  href="/employer-services"
-                  className="block py-3 text-slate-700 font-medium border-b border-slate-100"
-                  onClick={handleLinkClick}
-                >
-                  Employer Services (overview)
-                </Link>
 
                 {/* Resources */}
                 <div className="border-b border-slate-100 py-3">
@@ -244,7 +229,7 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                       <li key={href}>
                         <Link
                           href={href}
-                          className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5"
+                          className="text-sm text-slate-600 hover:text-teal-600 transition-colors block py-1.5"
                           onClick={handleLinkClick}
                         >
                           {name}

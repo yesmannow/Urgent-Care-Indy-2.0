@@ -88,7 +88,15 @@ export default function UrgentCarePage() {
           />
         </div>
         <p className="mt-6 text-slate-600 text-sm md:text-base">
-          We offer affordable self-pay rates for all other services.
+          Self-pay office visits start at $100 for common conditions. We offer
+          tiered self-pay pricing for suturing, STI visits, and more.{" "}
+          <Link
+            href="/patient-resources/pricing#self-pay-tiers"
+            className="text-primary-blue font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 rounded"
+          >
+            See full self-pay tiers and fixed-price services
+          </Link>
+          .
         </p>
       </section>
 

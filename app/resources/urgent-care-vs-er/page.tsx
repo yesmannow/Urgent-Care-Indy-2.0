@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "Know when to choose urgent care vs the ER. For Indianapolis and Pike Township: minor injuries, fever, burns—we're here. Life-threatening? Call 911.",
 };
 
-const HERO_IMAGE = "/images/clinic/providers/chase-keirn.webp";
+const HERO_IMAGE = "/images/er-vs-urgentcare/half-choosing.png";
 
 const quickFacts = [
   {
@@ -146,7 +146,7 @@ export default function UrgentCareVsErPage() {
           <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-slate-200 shadow-medical">
             <Image
               src={HERO_IMAGE}
-              alt="Chase Keirn, PA-C at Urgent Care Indy"
+              alt="Choosing between urgent care and the emergency room"
               fill
               className="object-cover object-center"
               priority
@@ -193,28 +193,39 @@ export default function UrgentCareVsErPage() {
         </div>
       </section>
 
-      {/* When to go to ER (educational) */}
+      {/* When to go to ER (educational) — with ER exterior image */}
       <section
         className="container py-12 md:py-16 border-b border-slate-200"
         aria-labelledby="when-er-heading"
       >
-        <h2
-          id="when-er-heading"
-          className="text-2xl md:text-3xl font-bold text-slate-900 mb-6"
-        >
-          When do you go to an emergency room?
-        </h2>
-        <div className="max-w-3xl prose prose-slate">
-          <p className="text-slate-600 text-lg leading-relaxed">
-            Call 911 or go to the emergency room if you&apos;re{" "}
-            <strong className="text-slate-900">systemically sick</strong>—when
-            an illness affects your whole body, with severe pain or sudden
-            severe symptoms, a fever that won&apos;t break, or something that
-            doesn&apos;t work (e.g., you can&apos;t move an arm or leg or breathe
-            normally). Hospital ERs are equipped for life-threatening
-            emergencies: heart attack, stroke, seizures, and traumatic injuries
-            from serious accidents.
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div>
+            <h2
+              id="when-er-heading"
+              className="text-2xl md:text-3xl font-bold text-slate-900 mb-6"
+            >
+              When do you go to an emergency room?
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Call 911 or go to the emergency room if you&apos;re{" "}
+              <strong className="text-slate-900">systemically sick</strong>—when
+              an illness affects your whole body, with severe pain or sudden
+              severe symptoms, a fever that won&apos;t break, or something that
+              doesn&apos;t work (e.g., you can&apos;t move an arm or leg or breathe
+              normally). Hospital ERs are equipped for life-threatening
+              emergencies: heart attack, stroke, seizures, and traumatic injuries
+              from serious accidents.
+            </p>
+          </div>
+          <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-slate-200 shadow-medical">
+            <Image
+              src="/images/er-vs-urgentcare/half-emergency.webp"
+              alt="Hospital emergency entrance — go here for life-threatening emergencies"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
         </div>
       </section>
 
@@ -245,31 +256,71 @@ export default function UrgentCareVsErPage() {
         </div>
       </section>
 
-      {/* Local scenarios */}
+      {/* Common conditions — visual from breaks & sprains image */}
       <section
-        className="container py-12 md:py-16 border-b border-slate-200"
-        aria-labelledby="local-scenarios-heading"
+        className="container py-12 md:py-16 border-b border-slate-200 bg-slate-50/50"
+        aria-labelledby="conditions-visual-heading"
       >
         <h2
-          id="local-scenarios-heading"
+          id="conditions-visual-heading"
+          className="text-2xl md:text-3xl font-bold text-slate-900 mb-8"
+        >
+          From breaks and sprains to bites and burns
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="relative aspect-[4/3] max-w-md rounded-xl overflow-hidden border border-slate-200 shadow-medical bg-white">
+            <Image
+              src="/images/er-vs-urgentcare/from-breaks-and-sprains-to-bites-and-burns-414x380.jpg"
+              alt="Common urgent care conditions: sprains, strains, cuts, flu, burns, and more"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+          <div>
+            <p className="text-slate-600 text-lg leading-relaxed mb-6">
+              Maybe you tripped on a step at Eagle Creek Park and can&apos;t put
+              weight on a swollen ankle. Perhaps your child spiked a fever on a
+              Saturday night in Pike Township and the pediatrician&apos;s office is
+              closed. Or you had a minor kitchen burn at home. In these situations,
+              urgent care is the right choice—walk in, get seen, and get back to
+              your day.
+            </p>
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Patients choose urgent care when a primary care doctor isn&apos;t
+              available, for minor emergencies like sprains, cuts needing stitches,
+              and common illnesses like colds, flu, and allergies—and for shorter
+              wait times and lower costs than freestanding or hospital ERs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Urgent care conditions icons */}
+      <section
+        className="container py-12 md:py-16 border-b border-slate-200"
+        aria-labelledby="conditions-icons-heading"
+      >
+        <h2
+          id="conditions-icons-heading"
           className="text-2xl md:text-3xl font-bold text-slate-900 mb-6"
         >
-          Choosing Urgent Care Indy
+          Common conditions we treat
         </h2>
-        <p className="text-slate-600 text-lg leading-relaxed max-w-3xl mb-6">
-          Maybe you tripped on a step at Eagle Creek Park and can&apos;t put
-          weight on a swollen ankle. Perhaps your child spiked a fever on a
-          Saturday night in Pike Township and the pediatrician&apos;s office is
-          closed. Or you had a minor kitchen burn at home. In these situations,
-          urgent care is the right choice—walk in, get seen, and get back to
-          your day.
+        <p className="text-slate-600 mb-8 max-w-2xl">
+          Sprains, strains, strep, flu, cuts, burns, and more—urgent care can
+          handle it without the ER wait or cost.
         </p>
-        <p className="text-slate-600 text-lg leading-relaxed max-w-3xl">
-          Patients choose urgent care when a primary care doctor isn&apos;t
-          available, for minor emergencies like sprains, cuts needing stitches,
-          and common illnesses like colds, flu, and allergies—and for shorter
-          wait times and lower costs than freestanding or hospital ERs.
-        </p>
+        <div className="relative max-w-2xl mx-auto rounded-xl overflow-hidden border border-slate-200 shadow-medical bg-white">
+          <Image
+            src="/images/er-vs-urgentcare/Icons_Urgent_Care.png"
+            alt="Icons for common urgent care conditions: sprains, strains, strep throat, allergies, headache, cuts, flu, pink eye, burns, stomach pain, broken bones"
+            width={828}
+            height={760}
+            className="w-full h-auto object-contain"
+            sizes="(max-width: 768px) 100vw, 672px"
+          />
+        </div>
       </section>
 
       {/* Condition Comparison Matrix */}
