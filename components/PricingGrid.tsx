@@ -64,7 +64,8 @@ export function PricingGrid() {
 
       {/* Insurance – simple grid of badges */}
       <div
-        className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-medical"
+        id="insurance"
+        className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-medical scroll-mt-24"
         role="region"
         aria-labelledby="insurance-heading"
       >

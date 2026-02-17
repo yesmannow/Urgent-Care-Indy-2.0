@@ -17,8 +17,14 @@ export default function PricingPage() {
             Transparent Pricing
           </h1>
           <p className="mt-2 text-lg text-slate-600">
-            Clear rates for self-pay and information on accepted insurance. No
-            hidden fees.
+            Clear rates for self-pay and{" "}
+            <a
+              href="#insurance"
+              className="text-primary-blue font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 rounded"
+            >
+              insurance accepted
+            </a>
+            . No hidden fees.
           </p>
         </header>
 

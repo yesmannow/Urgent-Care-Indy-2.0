@@ -38,6 +38,22 @@
   }
 }
 
+/* Global A11y: visible focus for keyboard/screen reader users (ADA) */
+@layer base {
+  *:focus {
+    outline: none;
+  }
+  *:focus-visible {
+    outline: 2px solid var(--color-primary-blue);
+    outline-offset: 2px;
+  }
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-primary-blue);
+    outline-offset: 2px;
+  }
+}
+
 @layer components {
   .animate-marquee {
     animation: marquee 25s linear infinite;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AilmentGrid } from "@/components/services/AilmentGrid";
 import { PricingCard } from "@/components/services/PricingCard";
+import { SymptomCheckerCTA } from "@/components/ui/SymptomCheckerCTA";
 
 export const metadata: Metadata = {
   title: "Urgent Care Services | Walk-Ins Welcome | Urgent Care Indy",
@@ -91,30 +92,20 @@ export default function UrgentCarePage() {
         </p>
       </section>
 
-      {/* Safety & Conversion CTAs */}
+      {/* Symptom triage CTA (2026 Speed-to-Lead) */}
       <section className="container py-12 md:py-16">
-        <div className="max-w-2xl space-y-6">
-          <p className="text-lg font-semibold text-slate-900">
-            Not sure if you need Urgent Care?
-          </p>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 rounded-xl bg-primary-blue text-white font-bold shadow-medical hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+        <SymptomCheckerCTA />
+        <p className="text-slate-600 mt-6">
+          Need ongoing care?{" "}
+          <a
+            href="https://primarycareindy.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-blue font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 rounded"
           >
-            Use Our Triage Tool
-          </Link>
-          <p className="text-slate-600 pt-4 border-t border-slate-200">
-            Need ongoing care?{" "}
-            <a
-              href="https://primarycareindy.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary-blue font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 rounded"
-            >
-              Visit Primary Care Indy
-            </a>
-          </p>
-        </div>
+            Visit Primary Care Indy
+          </a>
+        </p>
       </section>
 
       <section className="container pb-12">

@@ -8,6 +8,7 @@ import { TriageToggle } from "@/components/tools/TriageToggle";
 import { ServiceGrid } from "@/components/home/ServiceGrid";
 import { ClinicMap } from "@/components/ui/ClinicMap";
 import { DivisionCards } from "@/components/clinic/DivisionCards";
+import { PrimaryCareBridge } from "@/components/sections/PrimaryCareBridge";
 import { SaveSpotModal } from "@/components/SaveSpotModal";
 
 export function HomePageWithSaveSpot() {
@@ -68,36 +69,30 @@ export function HomePageWithSaveSpot() {
         </div>
       </section>
 
+      {/* Hyper-local SEO: Serving Northwest Indianapolis */}
+      <section
+        className="container py-12 md:py-16 border-t border-slate-200 bg-slate-50"
+        aria-labelledby="serving-heading"
+      >
+        <h2
+          id="serving-heading"
+          className="text-2xl md:text-3xl font-bold text-slate-900 mb-6"
+        >
+          Serving Northwest Indianapolis
+        </h2>
+        <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
+          Conveniently located on Michigan Rd, we are the preferred urgent care
+          for residents in <strong className="text-slate-900">Pike Township</strong>,{" "}
+          <strong className="text-slate-900">Zionsville</strong>,{" "}
+          <strong className="text-slate-900">Carmel</strong>, and the surrounding
+          Northwest Indy area. Just minutes from I-465.
+        </p>
+      </section>
+
       {/* Wellness Ecosystem – sister clinics (Pike Medical divisions) */}
       <DivisionCards />
 
-      {/* Continuity of Care – Primary Care bridge */}
-      <section
-        className="container py-12 md:py-16 border-t border-slate-200 bg-white"
-        aria-labelledby="continuity-heading"
-      >
-        <div className="max-w-2xl mx-auto text-center">
-          <h2
-            id="continuity-heading"
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-4"
-          >
-            Continuity of Care
-          </h2>
-          <p className="text-lg text-slate-600 leading-relaxed mb-8">
-            More than just urgent care. We share our building with PrimaryCare
-            Indy. From diabetes management to heart health, we provide a seamless
-            transition from acute injury to long-term wellness.
-          </p>
-          <a
-            href="https://primarycareindy.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 transition-colors"
-          >
-            Visit PrimaryCare Indy
-          </a>
-        </div>
-      </section>
+      <PrimaryCareBridge />
     </>
   );
 }

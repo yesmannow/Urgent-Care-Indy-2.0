@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { AlertTriangle } from "lucide-react";
 import { ClinicMap } from "@/components/ui/ClinicMap";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -11,9 +12,34 @@ export const metadata: Metadata = {
     "Visit or contact Urgent Care Indy. 7911 N Michigan Rd, Indianapolis. Phone, fax, email. Map and hours.",
 };
 
+const EXTERIOR_IMAGE = "/images/clinic/exterior/Screenshot of UrgentCare Indy - Google Maps (7).jpg";
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-slate-50">
+      {/* Hero: exterior so patients recognize the building */}
+      <section className="relative min-h-[35vh] flex items-end overflow-hidden" aria-label="Our location">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={EXTERIOR_IMAGE}
+            alt="Urgent Care Indy building exterior, 7911 N Michigan Rd—recognize us when you drive in"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-slate-900/30" aria-hidden />
+        </div>
+        <div className="container relative z-10 py-12 md:py-16 max-w-5xl px-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+            Contact Us
+          </h1>
+          <p className="mt-2 text-lg text-slate-200">
+            7911 N Michigan Rd — we&apos;re here when you need us.
+          </p>
+        </div>
+      </section>
+
       <div className="container py-8 md:py-12 max-w-5xl px-4">
         {/* Emergency warning at top */}
         <div
@@ -31,10 +57,7 @@ export default function ContactPage() {
         </div>
 
         <header className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-            Contact Us
-          </h1>
-          <p className="mt-2 text-slate-600 text-lg">
+          <p className="text-slate-600 text-lg">
             Get in touch or stop by. We&apos;re here to help.
           </p>
         </header>

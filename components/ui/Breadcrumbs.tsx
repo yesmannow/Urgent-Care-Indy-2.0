@@ -24,6 +24,7 @@ const segmentLabels: Record<string, string> = {
   "patient-services": "Patient Services",
   about: "About",
   resources: "Resources",
+  "urgent-care-vs-er": "Urgent Care vs ER",
   forms: "Patient Forms",
   "patient-intake": "New Patient Registration",
   "dot-physical": "DOT Physical Form",
@@ -31,6 +32,11 @@ const segmentLabels: Record<string, string> = {
   "patient-resources": "Patient Resources",
   pricing: "Pricing",
   "occupational-health": "Occupational Health",
+  "workplace-injuries": "Workplace Injuries",
+  "drug-testing": "Employer Drug Testing",
+  "regulatory-evaluations": "Regulatory Evaluations",
+  "onsite-clinic": "Onsite Clinic Services",
+  "resources-forms": "Resources & Forms",
 };
 
 function getLabel(segment: string): string {

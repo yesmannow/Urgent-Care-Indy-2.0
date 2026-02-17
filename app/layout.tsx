@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { AirQualityAlert } from "@/components/tools/AirQualityAlert";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { MobileStickyCTA } from "@/components/ui/MobileStickyCTA";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -21,8 +22,16 @@ export const metadata: Metadata = {
     template: "%s | Urgent Care Indy",
   },
   description:
-    "No appointment needed, $35 sports physicals. Family-owned urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Open M–F 8am–6:30pm, Sat 8am–2:30pm.",
-  keywords: ["Urgent Care", "Indianapolis", "DOT Physical", "X-Ray"],
+    "No appointment needed, $35 sports physicals. Pike Township urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Michigan Rd medical—open M–F 8am–6:30pm, Sat 8am–2:30pm.",
+  keywords: [
+    "Urgent Care",
+    "Indianapolis",
+    "Pike Township Urgent Care",
+    "Michigan Rd Medical",
+    "DOT Physical",
+    "X-Ray",
+    "urgent care near me",
+  ],
   authors: [{ name: "Urgent Care Indy", url: SITE_URL }],
   creator: "Urgent Care Indy",
   publisher: "Urgent Care Indy",
@@ -83,8 +92,9 @@ export default function RootLayout({
         <JsonLd />
         <AirQualityAlert />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pb-20 sm:pb-0">{children}</main>
         <Footer />
+        <MobileStickyCTA />
       </body>
     </html>
   );

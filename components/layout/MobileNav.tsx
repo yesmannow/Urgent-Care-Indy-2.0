@@ -176,7 +176,12 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                     aria-controls="mobile-employer-accordion"
                     id="mobile-employer-trigger"
                   >
-                    <span>{EMPLOYER_ACCORDION_KEY}</span>
+                    <span className="inline-flex items-center gap-1.5">
+                      {EMPLOYER_ACCORDION_KEY}
+                      <span className="rounded-full bg-primary-blue/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-blue">
+                        B2B
+                      </span>
+                    </span>
                     <ChevronDown
                       className={`h-5 w-5 text-slate-400 shrink-0 transition-transform ${employerExpanded ? "rotate-180" : ""}`}
                       aria-hidden
@@ -206,22 +211,13 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                               </Link>
                             </li>
                           ))}
-                          <li>
-                            <Link
-                              href="/services/occupational-health"
-                              className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5"
-                              onClick={handleLinkClick}
-                            >
-                              Occupational Health (full page)
-                            </Link>
-                          </li>
-                          <li>
+                          <li className="pt-2">
                             <Link
                               href="/portal"
-                              className="text-sm text-slate-600 hover:text-primary-blue transition-colors block py-1.5 font-medium"
+                              className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
                               onClick={handleLinkClick}
                             >
-                              Portal Login
+                              B2B Portal
                             </Link>
                           </li>
                         </ul>
@@ -270,6 +266,7 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                     href="/schedule"
                     className="block w-full text-center bg-primary-blue text-white rounded-full px-5 py-3 font-bold hover:bg-blue-700 transition-colors shadow-medical"
                     onClick={handleLinkClick}
+                    aria-label="Save your spot at our Michigan Road clinic"
                   >
                     Save Your Spot
                   </Link>

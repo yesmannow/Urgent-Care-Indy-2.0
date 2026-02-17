@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { ShieldCheck, FlaskConical, Briefcase, LogIn } from "lucide-react";
+import { Building2, ShieldAlert, FileStack, Truck, LogIn, ChevronRight, ExternalLink } from "lucide-react";
 import { employerServices } from "@/lib/navigation";
 
-const iconMap = {
-  "DOT Physicals": ShieldCheck,
-  "Drug Screens": FlaskConical,
-  "Workers Comp Injury Management": Briefcase,
-} as const;
+const iconMap: Record<(typeof employerServices)[number]["id"], typeof Building2> = {
+  "occupational-health": Building2,
+  "workplace-injuries": Building2,
+  "drug-testing": ShieldAlert,
+  "regulatory-evaluations": Truck,
+  "onsite-clinic": Building2,
+  "resources-forms": FileStack,
+};
 
 type EmployerMegaMenuProps = {
   isOpen: boolean;
@@ -34,63 +37,62 @@ export function EmployerMegaMenu({
       aria-label="Employer services"
     >
       <div className="container py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Columns 1–3: Employer service blocks with copy */}
-          {employerServices.map(({ title, price, note, description, href }) => {
-            const Icon = iconMap[title as keyof typeof iconMap] ?? Briefcase;
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={onClose}
-                className="group block p-5 rounded-xl border border-slate-200 hover:border-primary-blue/30 hover:bg-slate-50/50 transition-colors"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-primary-blue group-hover:bg-primary-blue/10 transition-colors">
-                    <Icon className="h-5 w-5" aria-hidden />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-baseline gap-2">
-                      <span className="font-semibold text-slate-900 group-hover:text-primary-blue transition-colors">
-                        {title}
-                      </span>
-                      {price && (
-                        <span className="text-sm font-bold text-primary-blue">
-                          {price}
+        <p className="text-xs font-semibold uppercase tracking-wider text-primary-blue mb-4">
+          Employers
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Columns 1–2: Structured list of B2B pages */}
+          <div className="md:col-span-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {employerServices.map(({ id, title, description, href }) => {
+                const Icon = iconMap[id] ?? Building2;
+                return (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      onClick={onClose}
+                      className="group flex items-start gap-3 p-4 rounded-xl border border-slate-200 hover:border-blue-600/30 hover:bg-slate-50/80 transition-colors"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-primary-blue group-hover:bg-blue-600/10 transition-colors">
+                        <Icon className="h-5 w-5" aria-hidden />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="font-semibold text-slate-900 group-hover:text-primary-blue transition-colors block">
+                          {title}
                         </span>
-                      )}
-                    </div>
-                    {note && (
-                      <p className="text-xs font-medium text-slate-500 mt-0.5">
-                        {note}
-                      </p>
-                    )}
-                    <p className="mt-2 text-sm text-slate-600 leading-relaxed line-clamp-3">
-                      {description}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+                        <p className="mt-0.5 text-sm text-slate-500 line-clamp-2">
+                          {description}
+                        </p>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" aria-hidden />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
-          {/* Column 4: Portal CTA + Overview link */}
+          {/* Column 3: B2B Portal CTA (external portal) */}
           <div className="md:col-span-1 flex flex-col gap-3">
             <Link
               href="/portal"
               onClick={onClose}
-              className="flex flex-col justify-center items-center gap-3 min-h-[120px] bg-primary-blue text-white rounded-xl px-6 py-6 text-center hover:bg-blue-700 transition-colors shadow-medical"
+              className="flex flex-col justify-center items-center gap-3 min-h-[140px] rounded-xl px-6 py-6 text-center bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-medical border border-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+              aria-label="B2B Portal — opens patient and employer portal in same tab"
             >
-              <LogIn className="h-8 w-8 text-white/90 shrink-0" aria-hidden />
-              <span className="font-bold text-lg">Portal Login</span>
-              <span className="text-sm text-white/90">Employer & patient access</span>
+              <LogIn className="h-8 w-8 text-blue-400 shrink-0" aria-hidden />
+              <span className="font-bold text-lg inline-flex items-center gap-1.5">
+                B2B Portal
+                <ExternalLink className="h-4 w-4 text-slate-400 shrink-0" aria-hidden />
+              </span>
+              <span className="text-sm text-slate-300">External portal — employer & patient access</span>
             </Link>
             <Link
               href="/services/occupational-health"
               onClick={onClose}
               className="text-center text-sm font-medium text-primary-blue hover:underline py-2"
             >
-              View full Occupational Health page
+              View all Occupational Health services
             </Link>
           </div>
         </div>

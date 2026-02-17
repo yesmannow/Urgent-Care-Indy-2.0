@@ -1,9 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Clock, CheckCircle } from "lucide-react";
+
+const HERO_IMAGE = "/images/clinic/providers/chase-keirn.webp";
 
 const container = {
   hidden: { opacity: 0 },
@@ -26,7 +29,22 @@ interface HeroSectionProps {
   onSaveSpotClick?: () => void;
 }
 
+function useCurrentTime(intervalMs = 60_000) {
+  const [currentTime, setCurrentTime] = useState("");
+  useEffect(() => {
+    const format = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }));
+    };
+    format();
+    const id = setInterval(format, intervalMs);
+    return () => clearInterval(id);
+  }, [intervalMs]);
+  return currentTime;
+}
+
 export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
+  const lastUpdated = useCurrentTime();
   return (
     <section
       className="relative min-h-[85vh] flex items-center overflow-hidden"
@@ -35,8 +53,8 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
       {/* Background: hero image + gradient overlay (slate-900/90 → slate-900/40) */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/services/urgent-care/tamimt9b-doctor-9964865_1280.jpg"
-          alt=""
+          src={HERO_IMAGE}
+          alt="Chase Keirn, PA-C at Urgent Care Indy"
           fill
           className="object-cover object-center"
           priority
@@ -78,6 +96,7 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                   type="button"
                   onClick={onSaveSpotClick}
                   className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                  aria-label="Save your spot at our Michigan Road clinic"
                 >
                   Save My Spot
                 </button>
@@ -85,6 +104,7 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                 <Link
                   href="/schedule"
                   className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                  aria-label="Save your spot at our Michigan Road clinic"
                 >
                   Save My Spot
                 </Link>
@@ -113,15 +133,22 @@ export function HeroSection({ onSaveSpotClick }: HeroSectionProps) {
                 Live Status
               </p>
               <div className="space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-slate-200">Current Wait Time</span>
-                  <span className="flex items-center gap-2 font-bold text-white">
-                    <span
-                      className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse"
-                      aria-hidden
-                    />
-                    15 mins
-                  </span>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-slate-200">Current Wait Time</span>
+                    <span className="flex items-center gap-2 font-bold text-white">
+                      <span
+                        className="h-2.5 w-2.5 rounded-full bg-red-500 shrink-0 animate-pulse"
+                        aria-hidden
+                      />
+                      15 mins
+                    </span>
+                  </div>
+                  {lastUpdated && (
+                    <p className="text-xs text-white/70">
+                      Last updated: {lastUpdated}
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-slate-200">Open Until</span>

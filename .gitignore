@@ -23,6 +23,8 @@
 # leftover nested folder (delete manually when no process is using it)
 /urgent-care-indy
 
+# public/images/ is not ignored — site assets (clinic, providers) stay in version control.
+
 # misc
 .DS_Store
 *.pem

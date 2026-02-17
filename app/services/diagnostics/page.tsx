@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { DynamicHero } from "@/components/ui/DynamicHero";
 
 const gallery = [
   {
@@ -21,13 +22,13 @@ const gallery = [
 
 export default function DiagnosticsPage() {
   return (
-    <div className="container py-16 max-w-4xl">
-      <h1 className="text-3xl font-bold text-slate-900 mb-4">
-        Diagnostics & Testing
-      </h1>
-      <p className="text-slate-600 mb-12">
-        On-site labs, X-ray, and rapid testing to get you answers quickly.
-      </p>
+    <div className="min-h-screen bg-white">
+      <DynamicHero
+        query="modern clinical laboratory"
+        title="Advanced Diagnostics"
+        subtitle="On-site labs, X-ray, and rapid testing to get you answers quickly."
+      />
+      <div className="container py-16 max-w-4xl">
 
       <section
         className="mb-12"
@@ -59,6 +60,7 @@ export default function DiagnosticsPage() {
       <Link href="/services" className="text-primary-blue font-medium hover:underline">
         ← All services
       </Link>
+      </div>
     </div>
   );
 }

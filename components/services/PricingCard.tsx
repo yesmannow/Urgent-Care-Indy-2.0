@@ -69,6 +69,7 @@ export function PricingCard({
               ? "bg-primary-blue text-white hover:bg-blue-900"
               : "bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200"
           }`}
+          aria-label={ctaLabel === "Save Your Spot" ? "Save your spot at our Michigan Road clinic" : undefined}
         >
           {ctaLabel}
         </Link>

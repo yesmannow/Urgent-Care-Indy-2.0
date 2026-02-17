@@ -157,9 +157,12 @@ export function Header() {
                   >
                     <Link
                       href={href}
-                      className="text-sm font-medium text-slate-600 hover:text-primary-blue transition-colors"
+                      className="text-sm font-medium text-slate-600 hover:text-primary-blue transition-colors inline-flex items-center gap-1.5"
                     >
                       {label}
+                      <span className="rounded-full bg-primary-blue/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-blue">
+                        B2B
+                      </span>
                     </Link>
                   </div>
                 );
@@ -221,6 +224,7 @@ export function Header() {
             <Link
               href="/schedule"
               className="hidden md:inline bg-primary-blue text-white rounded-full px-5 py-2 text-sm font-bold hover:bg-blue-700 transition-all shadow-medical"
+              aria-label="Save your spot at our Michigan Road clinic"
             >
               Save Your Spot
             </Link>

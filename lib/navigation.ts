@@ -42,36 +42,47 @@ export const patientServices = [
 
 export const resourceLinks = [
   { name: "Patient Forms", href: "/resources/forms" },
+  { name: "Urgent Care vs ER", href: "/resources/urgent-care-vs-er" },
+  { name: "Pricing", href: "/patient-resources/pricing" },
   { name: "Insurance Guide", href: "/payments-insurance" },
 ] as const;
 
-// Employer Services mega menu – Occupational Health + Portal
+// Employer Services mega menu – Occupational Health hub + sub-pages
 export const employerServices = [
   {
-    id: "dot-physicals",
-    title: "DOT Physicals",
-    price: "$95",
-    note: "Certified Providers",
-    description:
-      "FMCSA-certified medical examinations for commercial drivers. Fast turnaround, clear documentation for your fleet.",
-    href: "/services/occupational-health#dot-physicals",
+    id: "occupational-health",
+    title: "Occupational Health",
+    description: "Overview of employer solutions.",
+    href: "/services/occupational-health",
   },
   {
-    id: "drug-screens",
-    title: "Drug Screens",
-    price: null,
-    note: "5-panel, 10-panel, eScreen",
-    description:
-      "Pre-employment, post-accident, and random testing. Chain-of-custody assured. DOT and non-DOT panels available.",
-    href: "/services/occupational-health#drug-screens",
+    id: "workplace-injuries",
+    title: "Workplace Injuries",
+    description: "First aid, modified duty, workers' comp coordination.",
+    href: "/services/occupational-health/workplace-injuries",
   },
   {
-    id: "workers-comp",
-    title: "Workers Comp Injury Management",
-    price: null,
-    note: "Return-to-Work focus",
-    description:
-      "On-site evaluation, imaging, and treatment. We prioritize timely care and clear work-status documentation.",
-    href: "/services/occupational-health#workers-comp",
+    id: "drug-testing",
+    title: "Employer Drug Testing",
+    description: "5/10/12-panel, eScreen, MRO, random pool management.",
+    href: "/services/occupational-health/drug-testing",
+  },
+  {
+    id: "regulatory-evaluations",
+    title: "Regulatory Evaluations",
+    description: "Respirator fit, PFT, audiograms, TB screening.",
+    href: "/services/occupational-health/regulatory-evaluations",
+  },
+  {
+    id: "onsite-clinic",
+    title: "Onsite Clinic Services",
+    description: "Onsite drug testing, flu shots, biometric screenings.",
+    href: "/services/occupational-health/onsite-clinic",
+  },
+  {
+    id: "resources-forms",
+    title: "Resources & Forms",
+    description: "PDFs, DOT/OSHA links, treatment authorization.",
+    href: "/services/occupational-health/resources-forms",
   },
 ] as const;
