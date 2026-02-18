@@ -1,16 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Clock, Video, CreditCard, Star } from "lucide-react";
-import { getPexelsImageUrlFromQueries } from "@/lib/pexels";
 
-const FALLBACK_HERO_IMAGE = "/images/home/hero-bg.jpg";
+const HERO_IMAGE = "/images/home/hero-bg.jpg";
 
-export async function HeroSection() {
-  const heroImage =
-    (await getPexelsImageUrlFromQueries(
-      ["modern hospital reception", "friendly nurse with patient", "clean medical clinic interior"],
-      { orientation: "landscape" }
-    )) ?? FALLBACK_HERO_IMAGE;
+export function HeroSection() {
 
   return (
     <section className="relative bg-white pt-12 pb-20 overflow-hidden">
@@ -64,8 +58,8 @@ export async function HeroSection() {
           {/* Right: Visual Hero (Using specific image) */}
           <div className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white lg:translate-x-10">
             <Image
-              src={heroImage}
-              alt="Bright, modern clinic reception with friendly staff helping a patient"
+              src={HERO_IMAGE}
+              alt="Doctor attentively examining a patient with a stethoscope at UrgentCare Indy"
               fill
               className="object-cover"
               priority

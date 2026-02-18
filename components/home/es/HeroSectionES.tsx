@@ -54,7 +54,7 @@ export function HeroSectionES() {
           <div className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white lg:translate-x-10">
             <Image
               src="/images/home/hero-bg.jpg"
-              alt="Equipo médico atento en UrgentCare Indy"
+              alt="Médico examinando a un paciente con estetoscopio en UrgentCare Indy"
               fill
               className="object-cover"
               priority
