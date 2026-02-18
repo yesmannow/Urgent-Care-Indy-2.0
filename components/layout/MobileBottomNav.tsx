@@ -43,7 +43,7 @@ export default function MobileBottomNav() {
         variants={{ visible: { y: 0 }, hidden: { y: "100%" } }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="fixed bottom-0 left-0 right-0 z-[9999] md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-[100000] md:hidden"
       >
         {/* Glassmorphism Background */}
         <div className="mx-auto max-w-[520px] px-3 pb-3">
@@ -156,14 +156,14 @@ export default function MobileBottomNav() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 z-[10000] bg-black/40 backdrop-blur-sm"
+              className="fixed inset-0 z-[100001] bg-black/40 backdrop-blur-sm"
             />
             <motion.div
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed bottom-0 left-0 right-0 z-[10001] bg-white rounded-t-[30px] p-6 pb-24 shadow-2xl"
+              className="fixed bottom-0 left-0 right-0 z-[100002] bg-white rounded-t-[30px] p-6 pb-24 shadow-2xl"
             >
               <div className="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-8" />
 

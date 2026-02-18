@@ -3,6 +3,8 @@ import { Plus } from "lucide-react";
 import { ClinicMap } from "@/components/ui/ClinicMap";
 
 const serviceLinks = [
+  { href: "/services", label: "All Services" },
+  { href: "/services/urgent-care", label: "Urgent Care" },
   { href: "/services/occupational-health", label: "Occupational Health" },
   { href: "/employer-services", label: "Employer Services" },
   { href: "/services/bone-density", label: "Bone Density" },
@@ -10,8 +12,10 @@ const serviceLinks = [
 ];
 
 const quickLinks = [
+  { href: "/schedule", label: "Save Your Spot" },
   { href: "/resources/forms", label: "Patient Forms" },
   { href: "/patient-resources/pricing", label: "Pricing" },
+  { href: "/about", label: "About Us" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact Us" },
   { href: "https://quickclick.com/r/6nwjs", label: "Pay Bill Online", external: true },

@@ -44,6 +44,7 @@ const segmentLabels: Record<string, string> = {
   "regulatory-evaluations": "Regulatory Evaluations",
   "onsite-clinic": "Onsite Clinic Services",
   "resources-forms": "Resources & Forms",
+  physicals: "Physicals",
 };
 
 function getLabel(segment: string): string {

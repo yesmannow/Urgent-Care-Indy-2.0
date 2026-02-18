@@ -14,13 +14,20 @@ export default function NotFound() {
           You might have taken a wrong turn, but we&apos;re still here to help.
           Head back home or save your spot and we&apos;ll get you in.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
           <Link
             href="/"
             className="inline-flex items-center justify-center min-h-[52px] px-8 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-bold hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
             aria-label="Back to home page"
           >
             Back to Home
+          </Link>
+          <Link
+            href="/services"
+            className="inline-flex items-center justify-center min-h-[52px] px-8 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-bold hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+            aria-label="Browse all services"
+          >
+            Browse Services
           </Link>
           <Link
             href="/schedule"

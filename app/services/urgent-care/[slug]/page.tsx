@@ -194,15 +194,25 @@ export function generateStaticParams() {
   return (Object.keys(SILOS) as SiloKey[]).map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const key = params.slug as SiloKey;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const key = slug as SiloKey;
   const silo = SILOS[key];
   if (!silo) return {};
   return silo.metadata;
 }
 
-export default function UrgentCareSiloPage({ params }: { params: { slug: string } }) {
-  const key = params.slug as SiloKey;
+export default async function UrgentCareSiloPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const key = slug as SiloKey;
   const silo = SILOS[key];
   if (!silo) return notFound();
 

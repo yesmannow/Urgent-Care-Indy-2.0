@@ -9,6 +9,7 @@ export const patientServices = [
       { name: "Illness & Infection", href: "/services/urgent-care/illness" },
       { name: "Injury & Trauma", href: "/services/urgent-care/injury" },
       { name: "Wellness & Vaccines", href: "/services/urgent-care/wellness" },
+      { name: "Labs & Diagnostics", href: "/services/urgent-care/labs" },
     ],
   },
   {

@@ -134,9 +134,9 @@ export const megaMenus: {
       },
       {
         name: "Patient Forms",
-        href: "/resources/patient-forms",
+        href: "/resources/forms",
         icon: FileText,
-        desc: "Registration & HIPAA forms",
+        desc: "Dot physical, sports physical, intake",
       },
       {
         name: "Contact & Location",

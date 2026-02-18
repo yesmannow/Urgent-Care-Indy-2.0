@@ -20,9 +20,10 @@ const menuData = [
     category: "Urgent Care",
     icon: Stethoscope,
     links: [
-      { name: "Injury & Trauma", href: "/services/urgent-care/injury", icon: Bandage },
       { name: "Illness & Infection", href: "/services/urgent-care/illness", icon: Thermometer },
+      { name: "Injury & Trauma", href: "/services/urgent-care/injury", icon: Bandage },
       { name: "Wellness & Vaccines", href: "/services/urgent-care/wellness", icon: Syringe },
+      { name: "Labs & Diagnostics", href: "/services/urgent-care/labs", icon: FlaskConical },
       { name: "Care Paths (Symptom Guides)", href: "/care", icon: Compass },
     ],
   },
@@ -32,7 +33,7 @@ const menuData = [
     links: [
       { name: "On-Site Labs", href: "/services/diagnostics#labs", icon: FlaskConical },
       { name: "EKG Services", href: "/services/diagnostics#ekg", icon: HeartPulse },
-      { name: "Vaccines & Shots", href: "/services/urgent-care/wellness", icon: Syringe },
+      { name: "Vaccines & Shots", href: "/services/prevention#vaccines", icon: Syringe },
       { name: "STI Screening", href: "/services/prevention#sti", icon: ShieldCheck },
       { name: "Patient Forms", href: "/resources/forms", icon: FileText },
     ],

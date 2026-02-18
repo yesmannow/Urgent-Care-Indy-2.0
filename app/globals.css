@@ -109,3 +109,29 @@
     max-width: 1280px;
   }
 }
+
+/* Chatbase bubble: sit above mobile bottom nav (nav uses z-index 100000) */
+@media (max-width: 767px) {
+  #chatbase-bubble-button,
+  button#chatbase-bubble-button {
+    bottom: calc(5rem + 12px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 1rem !important;
+    z-index: 99990 !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  #chatbase-bubble-button:hover,
+  #chatbase-bubble-button:focus-visible {
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.2) !important;
+  }
+  #chatbase-bubble-button svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
