@@ -1,214 +1,78 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Clock, CheckCircle } from "lucide-react";
+import { Clock, Video, CreditCard, Star } from "lucide-react";
+import { getPexelsImageUrlFromQueries } from "@/lib/pexels";
 
-const HERO_IMAGE = "/images/services/urgent-care/tamimt9b-doctor-9964865_1280.jpg";
+const FALLBACK_HERO_IMAGE = "/images/home/hero-bg.jpg";
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
+export async function HeroSection() {
+  const heroImage =
+    (await getPexelsImageUrlFromQueries(
+      ["modern hospital reception", "friendly nurse with patient", "clean medical clinic interior"],
+      { orientation: "landscape" }
+    )) ?? FALLBACK_HERO_IMAGE;
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" as const },
-  },
-};
-
-interface HeroSectionProps {
-  onSaveSpotClick?: () => void;
-  language?: import("@/lib/i18n").Language;
-}
-
-function useCurrentTime(intervalMs = 60_000) {
-  const [currentTime, setCurrentTime] = useState("");
-  useEffect(() => {
-    const format = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }));
-    };
-    format();
-    const id = setInterval(format, intervalMs);
-    return () => clearInterval(id);
-  }, [intervalMs]);
-  return currentTime;
-}
-
-export function HeroSection({ onSaveSpotClick, language = "en" }: HeroSectionProps) {
-  const lastUpdated = useCurrentTime();
-  const copy =
-    language === "es"
-      ? {
-          h1: "Urgencias que respetan tu tiempo.",
-          sub: "Entra y sal en menos de 45 minutos. Sin cita previa.",
-          ctaSave: "Reservar mi lugar",
-          ctaTele: "Registro de telemedicina",
-          status: "Estado en vivo",
-          wait: "Tiempo de espera",
-          updated: "Actualizado:",
-          openUntil: "Abierto hasta",
-          insurance: "Seguro",
-          insuranceAccepted: "Aceptado",
-          call: "Llamar (317) 956-6288",
-        }
-      : {
-          h1: "Urgent Care that Respects Your Time.",
-          sub: "In and out in under 45 minutes. No appointment needed.",
-          ctaSave: "Save My Spot",
-          ctaTele: "Telemedicine Check-in",
-          status: "Live Status",
-          wait: "Current Wait Time",
-          updated: "Last updated:",
-          openUntil: "Open Until",
-          insurance: "Insurance",
-          insuranceAccepted: "Accepted",
-          call: "Call (317) 956-6288",
-        };
   return (
-    <section
-      className="relative min-h-[85vh] flex items-center overflow-hidden"
-      aria-label="Hero"
-    >
-      {/* Background: hero image + gradient overlay (slate-900/90 → slate-900/40) */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={HERO_IMAGE}
-          alt="Medical professional in blue scrubs writing on a clipboard with a stethoscope"
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/40"
-          aria-hidden
-        />
-      </div>
+    <section className="relative bg-white pt-12 pb-20 overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Brand Promise */}
+          <div className="space-y-8 relative z-20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-bold border border-green-100">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              Current Wait: &lt; 15 Mins
+            </div>
+            <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 leading-[1.1]">
+              Urgent Care that <br />
+              <span className="text-teal-600">respects your time.</span>
+            </h1>
+            <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
+              Walk-ins welcome. X-Ray on-site. Family-owned and serving Indianapolis with
+              hospital-grade care at a fraction of the cost.
+            </p>
 
-      <div className="container relative z-10 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Messaging */}
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="visible"
-            className="max-w-xl"
-          >
-            <motion.h1
-              variants={item}
-              className="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight"
-            >
-              {copy.h1}
-            </motion.h1>
-            <motion.p
-              variants={item}
-              className="mt-4 text-lg md:text-xl text-slate-200"
-            >
-              {copy.sub}
-            </motion.p>
-            <motion.div
-              variants={item}
-              className="mt-8 flex flex-wrap gap-4"
-            >
-              {onSaveSpotClick ? (
-                <button
-                  type="button"
-                  onClick={onSaveSpotClick}
-                  className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
-                  aria-label="Save your spot at our Michigan Road clinic"
-                >
-                  {copy.ctaSave}
-                </button>
-              ) : (
-                <Link
-                  href="/schedule"
-                  className="btn-primary-pulse min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-blue text-white font-semibold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
-                  aria-label="Save your spot at our Michigan Road clinic"
-                >
-                  {copy.ctaSave}
-                </Link>
-              )}
+            {/* The "Get Care" Action Group */}
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/portal"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/80 bg-transparent text-white font-semibold hover:bg-white/10 hover:border-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900"
+                href="/schedule"
+                className="flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold rounded-xl transition-all shadow-xl shadow-blue-900/10 transform hover:-translate-y-1"
               >
-                {copy.ctaTele}
+                Save Your Spot
               </Link>
-            </motion.div>
-          </motion.div>
+              <Link
+                href="https://www.mymedicallocker.com/"
+                target="_blank"
+                className="flex items-center justify-center px-8 py-4 bg-white border-2 border-slate-200 hover:border-teal-500 hover:text-teal-600 text-slate-700 font-bold rounded-xl transition-all"
+              >
+                <Video className="w-5 h-5 mr-2" /> Telehealth
+              </Link>
+            </div>
 
-          {/* Right: Live Status glass card – prominent Open Until & Wait Time with green "Live" dot */}
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="visible"
-            className="lg:justify-self-end w-full max-w-sm"
-          >
-            <motion.div
-              variants={item}
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <span
-                  className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse"
-                  aria-hidden
-                />
-                <p className="text-sm font-semibold text-white/90 uppercase tracking-wider">
-                  {copy.status}
-                </p>
+            <div className="flex gap-6 pt-4 text-slate-500 text-sm font-medium border-t border-slate-100 mt-8">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-teal-600" /> Open 7 Days
               </div>
-              <div className="space-y-4">
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-slate-200">{copy.wait}</span>
-                    <span className="flex items-center gap-2 font-bold text-white text-lg">
-                      <span
-                        className="h-2.5 w-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse"
-                        aria-hidden
-                      />
-                      <span className="status-pulse">15 mins</span>
-                    </span>
-                  </div>
-                  {lastUpdated && (
-                    <p className="text-xs text-white/70">
-                      {copy.updated} {lastUpdated}
-                    </p>
-                  )}
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-slate-200">{copy.openUntil}</span>
-                  <span className="flex items-center gap-2 font-bold text-white text-lg">
-                    <Clock className="h-5 w-5 text-white/80 shrink-0" aria-hidden />
-                    6:30 PM
-                  </span>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-slate-200">{copy.insurance}</span>
-                  <span className="flex items-center gap-2 font-bold text-white">
-                    <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0" aria-hidden />
-                    {copy.insuranceAccepted}
-                  </span>
-                </div>
-                <a
-                  href="tel:+13179566288"
-                  className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900"
-                  aria-label="Call (317) 956-6288"
-                >
-                  {copy.call}
-                </a>
+              <div className="flex items-center gap-2">
+                <CreditCard className="w-4 h-4 text-teal-600" /> Most Insurance
               </div>
-            </motion.div>
-          </motion.div>
+              <div className="flex items-center gap-2">
+                <Star className="w-4 h-4 text-teal-600" /> 4.8/5 Reviews
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Visual Hero (Using specific image) */}
+          <div className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white lg:translate-x-10">
+            <Image
+              src={heroImage}
+              alt="Bright, modern clinic reception with friendly staff helping a patient"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-slate-950/10 to-transparent" />
+          </div>
         </div>
       </div>
     </section>

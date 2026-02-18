@@ -42,7 +42,7 @@ export default function WorkplaceInjuriesPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGE}
-            alt=""
+            alt="Workplace safety and injury care scene representing workers' compensation services"
             fill
             className="object-cover object-center"
             priority

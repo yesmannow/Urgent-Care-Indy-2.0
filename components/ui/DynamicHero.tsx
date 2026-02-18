@@ -1,17 +1,21 @@
 import Image from "next/image";
 import { MapPin } from "lucide-react";
-import { getPexelsImageUrl } from "@/lib/pexels";
+import { getPexelsImageUrl, getPexelsImageUrlFromQueries } from "@/lib/pexels";
 import { HeroStatusTicker } from "@/components/ui/HeroStatusTicker";
 
 const FALLBACK_IMAGE =
   "/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (6).jpg";
 
 type DynamicHeroProps = {
-  query?: string;
+  query?: string | string[];
   title: string;
   subtitle?: string;
   /** When provided, use this image and skip Pexels fetch (e.g. local employer hero). */
   imageSrc?: string;
+  /** Used when Pexels is unavailable or returns no result. */
+  fallbackSrc?: string;
+  /** Accessibility text for the background image. */
+  imageAlt?: string;
 };
 
 export async function DynamicHero({
@@ -19,9 +23,17 @@ export async function DynamicHero({
   title,
   subtitle,
   imageSrc,
+  fallbackSrc,
+  imageAlt,
 }: DynamicHeroProps) {
-  const pexelsUrl = imageSrc ? null : await getPexelsImageUrl(query, { orientation: "landscape" });
-  const src = imageSrc ?? pexelsUrl ?? FALLBACK_IMAGE;
+  const pexelsUrl = imageSrc
+    ? null
+    : Array.isArray(query)
+      ? await getPexelsImageUrlFromQueries(query, { orientation: "landscape" })
+      : await getPexelsImageUrl(query, { orientation: "landscape" });
+
+  const src = imageSrc ?? pexelsUrl ?? fallbackSrc ?? FALLBACK_IMAGE;
+  const alt = imageAlt ?? `${title} background image`;
 
   return (
     <section
@@ -31,7 +43,7 @@ export async function DynamicHero({
       <div className="absolute inset-0 z-0">
         <Image
           src={src}
-          alt=""
+          alt={alt}
           fill
           className="object-cover object-center"
           priority

@@ -4,12 +4,11 @@ import { cookies } from "next/headers";
 import "./globals.css";
 import { AirQualityAlert } from "@/components/tools/AirQualityAlert";
 import { ChatWidget } from "@/components/ChatWidget";
-import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PwaInstallPrompt } from "@/components/tools/PwaInstallPrompt";
-import { MobileStickyCTA } from "@/components/ui/MobileStickyCTA";
 import { DEFAULT_LANGUAGE, LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/i18n";
+import { RootChrome } from "@/components/layout/RootChrome";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -102,16 +101,13 @@ export default async function RootLayout({
         </a>
         <JsonLd />
         <AirQualityAlert />
-        <Header language={language} />
-        <main id="main-content" className="flex-1 pb-20 sm:pb-0">
-          {children}
+        <main id="main-content" className="flex-1 pb-[100px] md:pb-0">
+          <RootChrome language={language}>{children}</RootChrome>
         </main>
-        <Footer />
-        <MobileStickyCTA language={language} />
         <PwaInstallPrompt language={language} />
         <ChatWidget />
+        <MobileBottomNav />
       </body>
     </html>
   );
 }
-

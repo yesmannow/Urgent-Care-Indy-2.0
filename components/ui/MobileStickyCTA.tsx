@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Clock, MapPin, Phone } from "lucide-react";
-import { SaveSpotModal } from "@/components/SaveSpotModal";
+import { ClipboardCheck, Clock, MapPin, Phone } from "lucide-react";
 import type { Language } from "@/lib/i18n";
 import { getClinicStatus } from "@/lib/clinicHours";
 
 const PHONE_NUMBER = "tel:+13179566288";
 const MAPS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=7911+N+Michigan+Rd,+Indianapolis,+IN+46268";
+const CHECK_IN_URL = "/schedule";
+const HOURS_URL = "/#visit-us";
 
 export function MobileStickyCTA({ language = "en" }: { language?: Language }) {
-  const [saveSpotOpen, setSaveSpotOpen] = useState(false);
   const [status, setStatus] = useState(() => getClinicStatus(language));
 
   useEffect(() => {
@@ -25,15 +25,21 @@ export function MobileStickyCTA({ language = "en" }: { language?: Language }) {
       ? {
           call: "Llamar",
           directions: "Direcciones",
-          save: "Reservar",
+          checkIn: "Check-in",
+          seeHours: "Ver horario",
           address: "7911 N Michigan Rd",
+          closedHours: "Cerrado—Horario",
         }
       : {
           call: "Call",
           directions: "Directions",
-          save: "Save Spot",
+          checkIn: "Check-In",
+          seeHours: "See hours",
           address: "7911 N Michigan Rd",
+          closedHours: "Closed—See hours",
         };
+
+  const statusPill = status.isOpen ? status.statusLabel : copy.closedHours;
 
   return (
     <>
@@ -51,9 +57,9 @@ export function MobileStickyCTA({ language = "en" }: { language?: Language }) {
             className={`shrink-0 inline-flex items-center rounded-full px-3 py-1 text-xs font-extrabold border ${
               status.isOpen ? "bg-emerald-100 text-emerald-900 border-emerald-200" : "bg-slate-100 text-slate-800 border-slate-200"
             }`}
-            aria-label={status.statusLabel}
+            aria-label={statusPill}
           >
-            {status.statusLabel}
+            {statusPill}
           </span>
         </div>
 
@@ -78,18 +84,27 @@ export function MobileStickyCTA({ language = "en" }: { language?: Language }) {
             {copy.directions}
           </a>
 
-          <button
-            type="button"
-            onClick={() => setSaveSpotOpen(true)}
-            className="flex items-center justify-center gap-2 bg-primary-blue text-white py-3 rounded-xl font-extrabold text-sm shadow-lg shadow-primary-blue/20 hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 min-h-[48px]"
-            aria-label={language === "es" ? "Reservar tu lugar" : "Save your spot"}
-          >
-            <Clock size={18} aria-hidden />
-            {copy.save}
-          </button>
+          {status.isOpen ? (
+            <a
+              href={CHECK_IN_URL}
+              className="flex items-center justify-center gap-2 bg-primary-blue text-white py-3 rounded-xl font-extrabold text-sm shadow-lg shadow-primary-blue/20 hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 min-h-[48px]"
+              aria-label={language === "es" ? "Hacer check-in" : "Check in"}
+            >
+              <ClipboardCheck size={18} aria-hidden />
+              {copy.checkIn}
+            </a>
+          ) : (
+            <a
+              href={HOURS_URL}
+              className="flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl font-extrabold text-sm hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 min-h-[48px]"
+              aria-label={language === "es" ? "Ver horario" : "See hours"}
+            >
+              <Clock size={18} aria-hidden />
+              {copy.seeHours}
+            </a>
+          )}
         </div>
       </div>
-      <SaveSpotModal isOpen={saveSpotOpen} onClose={() => setSaveSpotOpen(false)} />
     </>
   );
 }

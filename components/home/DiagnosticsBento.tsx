@@ -13,6 +13,7 @@ const bentoItems = [
     href: "/services/diagnostics#labs",
     size: "md:col-span-2",
     imgQuery: "modern medical lab",
+    imgAlt: "Modern clinical laboratory with microscope and testing equipment",
   },
   {
     title: "Bone Density",
@@ -21,6 +22,7 @@ const bentoItems = [
     href: "/services/prevention#dxa",
     size: "md:col-span-1",
     imgQuery: "bone scan medical",
+    imgAlt: "Blue-toned medical imaging display showing a bone scan",
   },
   {
     title: "Sleep Testing",
@@ -29,6 +31,7 @@ const bentoItems = [
     href: "/services/prevention#sleep",
     size: "md:col-span-1",
     imgQuery: "sleep clinic",
+    imgAlt: "Comfortable sleep clinic testing setup",
   },
   {
     title: "STI Screening",
@@ -37,6 +40,7 @@ const bentoItems = [
     href: "/services/prevention#sti",
     size: "md:col-span-2",
     imgQuery: "medical consultation",
+    imgAlt: "Provider speaking with a patient in a private medical consultation",
   },
 ];
 
@@ -72,7 +76,7 @@ export async function DiagnosticsBento() {
                 <div className="absolute inset-0">
                   <Image
                     src={imgSrc}
-                    alt=""
+                    alt={item.imgAlt}
                     fill
                     className="object-cover object-center"
                     sizes="(max-width: 768px) 100vw, 33vw"

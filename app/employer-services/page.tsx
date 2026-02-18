@@ -17,6 +17,7 @@ import { RapidInfoBar } from "@/components/ui/RapidInfoBar";
 import { ServiceDetailSection } from "@/components/sections/ServiceDetailSection";
 import { InsurancePricingSection } from "@/components/sections/InsurancePricingSection";
 import { ScrollRevealSection } from "@/components/ui/ScrollRevealSection";
+import { getPexelsImageUrlFromQueries } from "@/lib/pexels";
 
 export const metadata: Metadata = {
   title: "Occupational Health & Employer Services | Indianapolis",
@@ -29,21 +30,27 @@ const BENTO_ITEMS = [
     title: "DOT Physicals",
     desc: "Certified FMCSA examiners to keep your drivers on the road.",
     href: "#physicals",
-    img: "/images/employers/dot-truck.jpg",
+    fallbackImg: "/images/employers/dot-truck.jpg",
+    imgAlt: "Commercial truck driver and logistics fleet scene representing DOT physicals",
+    imgQueries: ["truck driver semi truck", "logistics fleet manager", "semi truck driver"],
     icon: Truck,
   },
   {
     title: "Drug Screening",
     desc: "5, 10, and 12-panel tests with rapid results available.",
     href: "#drug-testing",
-    img: "/images/employers/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg",
+    fallbackImg: "/images/employers/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg",
+    imgAlt: "Lab technician performing a compliant drug screening test",
+    imgQueries: ["laboratory technician testing", "medical laboratory sample testing", "clinic lab technician"],
     icon: ShieldCheck,
   },
   {
     title: "Workers' Comp & Injury",
     desc: "Aggressive return-to-work focus for workplace injuries.",
     href: "#workers-comp",
-    img: "/images/employers/workplace-injuries.webp",
+    fallbackImg: "/images/employers/workplace-injuries.webp",
+    imgAlt: "Construction workers wearing hard hats and safety vests representing workplace injury care",
+    imgQueries: ["construction worker hard hat safety vest", "warehouse worker logistics", "industrial safety team"],
     icon: HardHat,
   },
 ];
@@ -66,15 +73,27 @@ const whyPartnerItems = [
   },
 ];
 
-export default function EmployerServicesPage() {
+export default async function EmployerServicesPage() {
+  const bentoImages = await Promise.all(
+    BENTO_ITEMS.map((item) =>
+      getPexelsImageUrlFromQueries(item.imgQueries, { orientation: "landscape" })
+    )
+  );
+
   return (
     <div className="min-h-screen bg-white">
-      {/* 1. Hero – local employer image */}
+      {/* 1. Hero - local employer image */}
       <section className="relative min-h-[50vh]" aria-label="Employer Services">
         <DynamicHero
+          query={[
+            "construction worker hard hat safety vest",
+            "warehouse worker logistics",
+            "truck driver semi truck",
+          ]}
           title="Keep Your Workforce Healthy, Compliant, and Productive."
           subtitle="Fast, reliable care for your team. From DOT physicals to injury management, we help Indianapolis businesses reduce downtime and stay compliant."
-          imageSrc="/images/employers/occ-med-page-top.webp"
+          fallbackSrc="/images/employers/occ-med-page-top.webp"
+          imageAlt="Industrial workforce scene representing occupational health, safety, and logistics"
         />
         <div className="absolute bottom-0 left-0 right-0 z-10 pb-8">
           <div className="container px-4 max-w-6xl flex flex-wrap gap-4">
@@ -108,8 +127,9 @@ export default function EmployerServicesPage() {
             Employer service highlights
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {BENTO_ITEMS.map((item) => {
+            {BENTO_ITEMS.map((item, idx) => {
               const Icon = item.icon;
+              const imgSrc = bentoImages[idx] ?? item.fallbackImg;
               return (
                 <Link
                   key={item.title}
@@ -118,13 +138,14 @@ export default function EmployerServicesPage() {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <Image
-                      src={item.img}
-                      alt=""
+                      src={imgSrc}
+                      alt={item.imgAlt}
                       fill
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
+                    <div className="absolute inset-0 bg-teal-900/10" aria-hidden />
                     <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
                       <div className="w-10 h-10 rounded-xl bg-white/90 flex items-center justify-center">
                         <Icon className="h-5 w-5 text-teal-500" aria-hidden />

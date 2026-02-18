@@ -93,7 +93,7 @@ export default function OccupationalHealthPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGE}
-            alt=""
+            alt="Industrial workplace setting representing occupational health and employer services"
             fill
             className="object-cover object-center"
             priority

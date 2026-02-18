@@ -1,10 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getPexelsImageUrlFromQueries } from "@/lib/pexels";
 
 const INTERIOR_IMAGE = "/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (5).jpg";
 const PRIMARY_CARE_URL = "https://primarycareindy.com";
 
-export function PrimaryCareBridge() {
+export async function PrimaryCareBridge() {
+  const relationshipImage =
+    (await getPexelsImageUrlFromQueries(
+      ["senior doctor talking to patient", "happy family doctor checkup", "physician holding hands"],
+      { orientation: "landscape" }
+    )) ?? INTERIOR_IMAGE;
+
   return (
     <section
       className="bg-slate-50 py-16 md:py-20 border-y border-slate-200"
@@ -14,8 +21,8 @@ export function PrimaryCareBridge() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border border-slate-200">
             <Image
-              src={INTERIOR_IMAGE}
-              alt="Urgent Care Indy and PrimaryCare Indy professional reception area, 7911 N Michigan Rd"
+              src={relationshipImage}
+              alt="Primary care provider talking with a patient in a warm, supportive clinic setting"
               fill
               className="object-cover object-center"
               sizes="(max-width: 768px) 100vw, 50vw"

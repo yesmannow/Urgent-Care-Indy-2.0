@@ -65,7 +65,7 @@ export default function RegulatoryEvaluationsPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGE}
-            alt=""
+            alt="Clinical screening equipment representing OSHA and DOT regulatory evaluations"
             fill
             className="object-cover object-center"
             priority

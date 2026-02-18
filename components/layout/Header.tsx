@@ -3,9 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { ChevronDown, Phone } from "lucide-react";
 import { EmployerMegaMenu } from "./EmployerMegaMenu";
-import { MobileNav } from "./MobileNav";
 import { ServicesMegaMenu } from "./ServicesMegaMenu";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { LanguageToggle } from "@/components/ui/LanguageToggle";
@@ -25,6 +25,10 @@ type NavLink = {
 
 export function Header({ language }: { language: Language }) {
   const headerRef = useRef<HTMLElement | null>(null);
+  const { scrollY } = useScroll();
+  const hiddenRef = useRef(false);
+  const [hidden, setHidden] = useState(false);
+
   const [servicesMegaOpen, setServicesMegaOpen] = useState(false);
   const [servicesAutoFocus, setServicesAutoFocus] = useState(false);
   const servicesMegaCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -36,7 +40,23 @@ export function Header({ language }: { language: Language }) {
   const [resourcesAutoFocus, setResourcesAutoFocus] = useState(false);
   const resourcesCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  // Hide-on-scroll (mobile only): slides away on scroll down, snaps back on scroll up.
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      if (hiddenRef.current) {
+        hiddenRef.current = false;
+        setHidden(false);
+      }
+      return;
+    }
+
+    const previous = scrollY.getPrevious() ?? 0;
+    const nextHidden = latest > previous && latest > 150;
+    if (nextHidden !== hiddenRef.current) {
+      hiddenRef.current = nextHidden;
+      setHidden(nextHidden);
+    }
+  });
 
   const openServicesMega = (options?: { autoFocus?: boolean }) => {
     if (servicesMegaCloseTimeoutRef.current) {
@@ -200,11 +220,16 @@ export function Header({ language }: { language: Language }) {
   );
 
   return (
-    <header
+    <motion.header
       ref={headerRef}
       className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200"
+      variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <Breadcrumbs />
+      <div className="hidden md:block">
+        <Breadcrumbs />
+      </div>
 
       <div className="relative">
         <div className="container flex items-center justify-between h-16 gap-6">
@@ -382,28 +407,33 @@ export function Header({ language }: { language: Language }) {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <ServiceFinderPalette variant="icon" />
-            <LanguageToggle language={language} size="sm" />
             <Link
-              href="https://www.mymedicallocker.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline text-sm text-slate-500 hover:text-slate-700 transition-colors"
+              href="tel:+13179566288"
+              className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700"
+              aria-label={language === "es" ? "Llamar a Urgent Care Indy" : "Call Urgent Care Indy"}
             >
-              {language === "es" ? "Portal" : "Login to Portal"}
+              <Phone className="h-5 w-5" aria-hidden />
             </Link>
-            <Link
-              href="/schedule"
-              className="hidden md:inline bg-primary-blue text-white rounded-full px-5 py-2 text-sm font-bold hover:bg-blue-700 transition-all shadow-medical"
-              aria-label="Save your spot at our Michigan Road clinic"
-            >
-              {language === "es" ? "Reserva tu lugar" : "Save Your Spot"}
-            </Link>
-            <MobileNav
-              isOpen={mobileNavOpen}
-              onOpen={() => setMobileNavOpen(true)}
-              onClose={() => setMobileNavOpen(false)}
-            />
+
+            <div className="hidden md:flex items-center gap-3">
+              <ServiceFinderPalette variant="icon" />
+              <LanguageToggle language={language} size="sm" />
+              <Link
+                href="https://www.mymedicallocker.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-500 hover:text-slate-700 transition-colors"
+              >
+                {language === "es" ? "Portal" : "Login to Portal"}
+              </Link>
+              <Link
+                href="/schedule"
+                className="bg-primary-blue text-white rounded-full px-5 py-2 text-sm font-bold hover:bg-blue-700 transition-all shadow-medical"
+                aria-label="Save your spot at our Michigan Road clinic"
+              >
+                {language === "es" ? "Reserva tu lugar" : "Save Your Spot"}
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -429,6 +459,6 @@ export function Header({ language }: { language: Language }) {
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

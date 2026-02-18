@@ -1,13 +1,39 @@
-"use client";
-
-import { Microscope, Bone, HeartPulse, Bandage, ArrowRight } from "lucide-react";
+import { Microscope, HeartPulse, Syringe, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { getPexelsImageUrlFromQueries } from "@/lib/pexels";
 
-export function DiagnosticCommandCenter() {
+const FALLBACKS = {
+  xray: "/images/home/dr-pike-xray.jpg",
+  lab: "/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (6).jpg",
+  ekg: "/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (5).jpg",
+  vaccines: "/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (2).jpg",
+} as const;
+
+export async function DiagnosticCommandCenter() {
+  const [xrayImage, labImage, ekgImage, vaccinesImage] = await Promise.all([
+    getPexelsImageUrlFromQueries(
+      ["radiologist looking at x-ray blue", "digital bone scan", "radiology workstation"],
+      { orientation: "landscape" }
+    ),
+    getPexelsImageUrlFromQueries(
+      ["medical microscope laboratory", "scientist holding test tube", "clinical lab technician"],
+      { orientation: "landscape" }
+    ),
+    getPexelsImageUrlFromQueries(
+      ["heart rate monitor hospital", "EKG monitor hospital", "doctor holding stethoscope"],
+      { orientation: "landscape" }
+    ),
+    getPexelsImageUrlFromQueries(
+      ["child getting vaccine", "immunization syringe", "nurse giving vaccine"],
+      { orientation: "landscape" }
+    ),
+  ]);
+
   return (
-    <section className="py-16 bg-slate-50">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
           <div>
             <span className="text-teal-600 font-bold uppercase tracking-wider text-sm">
               Advanced Diagnostics
@@ -24,67 +50,105 @@ export function DiagnosticCommandCenter() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
-          <div className="md:col-span-2 bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-            <div className="relative z-10">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform">
-                <Bone className="h-6 w-6" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Digital X-Ray Suite</h3>
-              <p className="text-slate-500 max-w-md">
-                On-site imaging for fractures, dislocations, and foreign bodies. Immediate digital
-                interpretation means you leave with answers, not just a referral.
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(240px,auto)]">
+          <div className="md:col-span-2 relative rounded-3xl overflow-hidden shadow-lg group min-h-[300px]">
+            <Image
+              src={xrayImage ?? FALLBACKS.xray}
+              alt="Provider reviewing a digital X-ray on a blue-lit radiology workstation"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 66vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/45 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8 max-w-lg">
+              <h3 className="text-2xl font-bold text-white mb-2">Digital X-Ray Suite</h3>
+              <p className="text-slate-200">
+                On-site imaging for fractures and foreign bodies. Immediate digital interpretation by our
+                certified providers means you leave with answers.
               </p>
             </div>
-            <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
 
-          <div className="md:row-span-2 bg-slate-900 rounded-2xl p-8 text-white shadow-lg flex flex-col justify-between group overflow-hidden relative">
-            <div className="relative z-10">
-              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6 backdrop-blur-sm">
-                <Microscope className="h-6 w-6 text-teal-400" />
+          <div className="md:row-span-2 relative rounded-3xl overflow-hidden shadow-lg group min-h-[360px] md:min-h-[520px]">
+            <Image
+              src={labImage ?? FALLBACKS.lab}
+              alt="Lab technician working with a microscope in a modern clinical laboratory"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-slate-950/10" />
+            <div className="absolute inset-0 bg-teal-900/15" aria-hidden />
+            <div className="relative z-10 p-8 text-white flex flex-col justify-between h-full">
+              <div>
+                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6 backdrop-blur-sm">
+                  <Microscope className="h-6 w-6 text-teal-300" aria-hidden />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Rapid On-Site Lab</h3>
+                <ul className="space-y-4 text-slate-200 mt-4">
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full" /> Strep & Flu (15 mins)
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full" /> RSV & Mono
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full" /> Urinalysis & STI
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full" /> Pregnancy Testing
+                  </li>
+                </ul>
               </div>
-              <h3 className="text-2xl font-bold mb-2">Rapid In-House Lab</h3>
-              <ul className="space-y-3 text-slate-300 mt-4">
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /> Strep & Flu (15 mins)
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /> RSV & Mono
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /> Urinalysis & STI
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-teal-400 rounded-full" /> Pregnancy Testing
-                </li>
-              </ul>
+              <div className="text-sm font-semibold text-slate-200/90">
+                Most results while you wait.
+              </div>
             </div>
-            <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-teal-600/30 rounded-full blur-3xl group-hover:bg-teal-600/40 transition-all" />
           </div>
 
-          <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
-            <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-600 mb-4 group-hover:scale-110 transition-transform">
-              <HeartPulse className="h-6 w-6" />
+          <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-shadow group min-h-[240px]">
+            <Image
+              src={ekgImage ?? FALLBACKS.ekg}
+              alt="Close-up of a heart monitor displaying an EKG waveform in a hospital setting"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
+            <div className="absolute inset-0 bg-teal-900/15" aria-hidden />
+            <div className="relative z-10 p-8 text-white">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-4 backdrop-blur-sm">
+                <HeartPulse className="h-6 w-6 text-red-200" aria-hidden />
+              </div>
+              <h3 className="text-xl font-bold">EKG (12-Lead)</h3>
+              <p className="text-slate-200 text-sm mt-2">
+                On-site cardiac monitoring for fast triage and clearance.
+              </p>
             </div>
-            <h3 className="text-xl font-bold text-slate-900">Cardiac Monitoring</h3>
-            <p className="text-slate-500 text-sm mt-2">
-              12-Lead EKG on-site for chest pain triage and pre-op clearance.
-            </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
-            <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600 mb-4 group-hover:scale-110 transition-transform">
-              <Bandage className="h-6 w-6" />
+          <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-shadow group min-h-[240px]">
+            <Image
+              src={vaccinesImage ?? FALLBACKS.vaccines}
+              alt="Nurse preparing a vaccine injection in a clean clinical setting"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
+            <div className="absolute inset-0 bg-teal-900/15" aria-hidden />
+            <div className="relative z-10 p-8 text-white">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-4 backdrop-blur-sm">
+                <Syringe className="h-6 w-6 text-teal-200" aria-hidden />
+              </div>
+              <h3 className="text-xl font-bold">Vaccines & Prevention</h3>
+              <p className="text-slate-200 text-sm mt-2">
+                Seasonal vaccines and preventive care with walk-in convenience.
+              </p>
             </div>
-            <h3 className="text-xl font-bold text-slate-900">Trauma Care</h3>
-            <p className="text-slate-500 text-sm mt-2">
-              Laceration repair (stitches/glue), abscess drainage, and minor burn care.
-            </p>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

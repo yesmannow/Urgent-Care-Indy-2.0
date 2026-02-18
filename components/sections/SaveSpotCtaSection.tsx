@@ -19,7 +19,7 @@ export function SaveSpotCtaSection() {
         <div className="absolute inset-0 z-0">
           <Image
             src={CTA_BG}
-            alt=""
+            alt="Urgent Care Indy clinic interior background"
             fill
             className="object-cover object-center"
             sizes="100vw"

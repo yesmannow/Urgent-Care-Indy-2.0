@@ -22,7 +22,7 @@ export default function OurClinicPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/clinic/interior/Screenshot of UrgentCare Indy - Google Maps (2).jpg"
-            alt=""
+            alt="Urgent Care Indy clinic interior with clean, modern waiting area"
             fill
             className="object-cover object-center"
             priority

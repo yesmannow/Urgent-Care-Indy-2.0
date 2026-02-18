@@ -24,7 +24,7 @@ const pillars = [
 
 export async function WhyPartnerSection() {
   const imgUrl =
-    (await getPexelsImageUrl("corporate handshake", { orientation: "landscape" })) ??
+    (await getPexelsImageUrl("construction worker hard hat safety vest", { orientation: "landscape" })) ??
     FALLBACK;
 
   return (
@@ -37,7 +37,7 @@ export async function WhyPartnerSection() {
           <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[320px] rounded-3xl overflow-hidden border border-slate-200 shadow-lg">
             <Image
               src={imgUrl}
-              alt="Professional business partnership"
+              alt="Construction and logistics professionals in safety gear representing occupational health partnership"
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"

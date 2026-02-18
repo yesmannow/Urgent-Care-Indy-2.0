@@ -46,7 +46,7 @@ export default function DrugTestingPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={LAB_IMAGE}
-            alt=""
+            alt="Drug testing collection supplies arranged for workplace compliance screening"
             fill
             className="object-cover object-center"
             priority

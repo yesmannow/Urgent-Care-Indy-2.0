@@ -82,7 +82,7 @@ export default async function UrgentCarePage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/services/urgent-care/tamimt9b-doctor-9964865_1280.jpg"
-            alt=""
+            alt="Urgent care provider taking notes during a patient visit"
             fill
             className="object-cover object-center"
             priority
@@ -223,4 +223,3 @@ export default async function UrgentCarePage() {
     </div>
   );
 }
-

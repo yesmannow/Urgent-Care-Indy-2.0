@@ -41,7 +41,7 @@ export default function OnsiteClinicPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGE}
-            alt=""
+            alt="Mobile onsite clinic setup representing employer health services"
             fill
             className="object-cover object-center"
             priority
