@@ -6,9 +6,9 @@ export const patientServices = [
     category: "Urgent Care",
     icon: "Stethoscope",
     links: [
-      { name: "Minor Injuries", href: "/services/urgent-care#injuries" },
-      { name: "Minor Illnesses", href: "/services/urgent-care#illnesses" },
-      { name: "Sports Physicals", href: "/services/urgent-care" },
+      { name: "Illness & Infection", href: "/services/urgent-care/illness" },
+      { name: "Injury & Trauma", href: "/services/urgent-care/injury" },
+      { name: "Wellness & Vaccines", href: "/services/urgent-care/wellness" },
     ],
   },
   {

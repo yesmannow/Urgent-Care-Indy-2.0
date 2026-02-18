@@ -5,7 +5,7 @@ import { PricingGrid } from "@/components/PricingGrid";
 export const metadata: Metadata = {
   title: "Pricing & Self-Pay Rates",
   description:
-    "Transparent self-pay pricing: office visits from $100 (Level 1) to $300 (Level 4). Sports physicals $35, DOT $95, pre-employment $50, TB test $25. No appointment needed. We accept most major insurance.",
+    "Transparent self-pay pricing: office visits from $100 (Level 1) to $300 (Level 4). Sports physicals $30, DOT $95, pre-employment $50, TB test $25. No appointment needed. We accept most major insurance.",
 };
 
 export default function PricingPage() {
@@ -53,4 +53,3 @@ export default function PricingPage() {
     </div>
   );
 }
-

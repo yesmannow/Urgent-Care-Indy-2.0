@@ -3,14 +3,14 @@ import { Bandage, Compass, CreditCard, Thermometer } from "lucide-react";
 
 const chips = [
   {
-    label: "Injuries",
-    href: "/services/urgent-care#injuries",
+    label: "Injury",
+    href: "/services/urgent-care/injury",
     icon: Bandage,
     tone: "bg-blue-50 text-blue-800 border-blue-100 hover:bg-blue-100",
   },
   {
-    label: "Illnesses",
-    href: "/services/urgent-care#illnesses",
+    label: "Illness",
+    href: "/services/urgent-care/illness",
     icon: Thermometer,
     tone: "bg-teal-50 text-teal-800 border-teal-100 hover:bg-teal-100",
   },
@@ -59,4 +59,3 @@ export function WhatWeTreatChips() {
     </section>
   );
 }
-

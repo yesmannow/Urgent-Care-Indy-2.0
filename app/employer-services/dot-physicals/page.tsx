@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { CheckCircle2, Phone, FileText } from "lucide-react";
+import { CheckCircle2, FileText } from "lucide-react";
+import { EmployerSiloLayout } from "@/components/services/employer/EmployerSiloLayout";
+import { JsonLdScript } from "@/components/seo/JsonLdScript";
+import { buildFaqPageJsonLd, buildMedicalBusinessJsonLd } from "@/lib/seo/structuredData";
 
 const PAGE_DATA = {
   title: "DOT Physicals (FMCSA)",
-  subtitle: "Certified Examiners On-Staff — Walk-In Friendly and Fast Paperwork",
+  subtitle: "Certified Examiners On-Staff - Walk-In Friendly and Fast Paperwork",
   features: [
     "FMCSA certified medical examiners",
     "Clear guidance for drivers with common medical conditions",
@@ -17,39 +20,80 @@ const PAGE_DATA = {
 };
 
 export default function Page() {
+  const pagePath = "/employer-services/dot-physicals";
+  const businessJsonLd = buildMedicalBusinessJsonLd({
+    pagePath,
+    pageName: "DOT Physicals (FMCSA)",
+    services: [
+      { name: "DOT Physical (FMCSA)" },
+      { name: "Vision Screening" },
+      { name: "Urinalysis" },
+      { name: "Vitals & History" },
+    ],
+  });
+  const faqJsonLd = buildFaqPageJsonLd({
+    pagePath,
+    questions: [
+      {
+        question: "Do you have FMCSA-certified DOT physical examiners?",
+        answer:
+          "Yes—DOT physicals are performed by certified medical examiners. Walk-in friendly depending on volume.",
+      },
+      {
+        question: "What should drivers bring to a DOT physical?",
+        answer:
+          "Bring a valid ID, any required paperwork, and information about current medications and relevant medical history.",
+      },
+      {
+        question: "How fast is the paperwork turnaround?",
+        answer:
+          "Many drivers receive documentation the same day, depending on required forms and any needed follow-up information.",
+      },
+    ],
+  });
+
   return (
-    <div className="bg-slate-50 min-h-screen pb-20">
-      <div className="bg-slate-900 py-16">
-        <div className="container mx-auto px-4">
-          <span className="text-teal-400 font-bold uppercase tracking-wider text-sm">
-            Employer Services
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mt-4 max-w-3xl">
-            {PAGE_DATA.title}
-          </h1>
-          <p className="text-slate-300 text-xl mt-4 max-w-2xl">{PAGE_DATA.subtitle}</p>
-        </div>
-      </div>
+    <>
+      <JsonLdScript data={businessJsonLd} />
+      <JsonLdScript data={faqJsonLd} />
+      <EmployerSiloLayout
+        title={PAGE_DATA.title}
+        subtitle={PAGE_DATA.subtitle}
+        description={PAGE_DATA.mainContent}
+        imageSrc="/images/employers/dot-truck.jpg"
+        imageAlt="Commercial driver and logistics scene representing DOT physicals"
+        imageQueries={["truck driver semi truck", "logistics fleet manager"]}
+      >
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-2xl font-extrabold text-slate-900">What to Expect</h2>
+            <Link
+              href="/employer-services/contact"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 rounded-2xl bg-teal-600 hover:bg-teal-500 text-white font-extrabold transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+            >
+              {PAGE_DATA.cta}
+            </Link>
+          </div>
 
-      <div className="container mx-auto px-4 mt-[-40px] grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">What to Expect</h2>
-          <ul className="space-y-4 mb-8">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {PAGE_DATA.features.map((feature) => (
-              <li key={feature} className="flex items-start gap-3">
-                <CheckCircle2 className="h-6 w-6 text-teal-600 shrink-0" />
-                <span className="text-slate-700 text-lg">{feature}</span>
-              </li>
+              <div
+                key={feature}
+                className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-5"
+              >
+                <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" aria-hidden />
+                <p className="text-slate-800 font-semibold leading-snug">{feature}</p>
+              </div>
             ))}
-          </ul>
+          </div>
 
-          <div className="bg-slate-50 rounded-xl p-6 mb-8">
-            <h3 className="font-bold text-slate-900 mb-3">Related Clinical Services</h3>
+          <div className="mt-8 rounded-2xl bg-slate-50 border border-slate-200 p-6">
+            <h3 className="font-extrabold text-slate-900 mb-3">Related Clinical Services</h3>
             <div className="flex flex-wrap gap-2">
               {PAGE_DATA.ancillaryServices.map((service) => (
                 <span
                   key={service}
-                  className="px-3 py-1 bg-white border border-slate-200 rounded-full text-sm text-slate-600 font-medium"
+                  className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-slate-700 font-semibold"
                 >
                   {service}
                 </span>
@@ -57,46 +101,20 @@ export default function Page() {
             </div>
           </div>
 
-          <hr className="my-8 border-slate-100" />
-          <div className="prose prose-slate max-w-none">
-            <p className="text-slate-600 leading-relaxed">{PAGE_DATA.mainContent}</p>
-          </div>
-        </div>
-
-        <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-            <h3 className="font-bold text-slate-900 mb-4">Quick Actions</h3>
-            <div className="space-y-3">
-              <Link
-                href="/employer-services/contact"
-                className="flex items-center justify-center w-full py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-bold transition-colors shadow-sm"
-              >
-                {PAGE_DATA.cta}
-              </Link>
-              <a
-                href="tel:317-956-6288"
-                className="flex items-center justify-center w-full py-3 bg-white border-2 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50 rounded-lg font-bold transition-colors"
-              >
-                <Phone className="w-4 h-4 mr-2" /> (317) 956-6288
-              </a>
-            </div>
-          </div>
-
-          <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
-            <h3 className="font-bold text-blue-900 mb-2">Need Authorization Forms?</h3>
-            <p className="text-blue-700 text-sm mb-4">
-              Download our standard authorization form to send with your employee.
+          <div className="mt-8 rounded-2xl bg-blue-50 border border-blue-100 p-6">
+            <h3 className="font-extrabold text-blue-900 mb-2">Need Authorization Forms?</h3>
+            <p className="text-blue-800/80 text-sm mb-4">
+              Download our standard authorization form to send with your driver.
             </p>
             <Link
               href="/employer-services/resources"
-              className="text-sm font-semibold text-blue-600 hover:underline flex items-center gap-1"
+              className="text-sm font-extrabold text-blue-700 hover:underline inline-flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
             >
-              <FileText className="w-4 h-4" /> Download PDF
+              <FileText className="w-4 h-4" aria-hidden /> Download PDF
             </Link>
           </div>
         </div>
-      </div>
-    </div>
+      </EmployerSiloLayout>
+    </>
   );
 }
-

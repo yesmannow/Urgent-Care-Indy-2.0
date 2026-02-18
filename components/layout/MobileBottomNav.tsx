@@ -30,7 +30,7 @@ export default function MobileBottomNav() {
 
   const navItems: NavItem[] = [
     { name: "Home", href: "/", icon: Home },
-    { name: "Urgent Care", href: "/services/diagnostics", icon: Stethoscope },
+    { name: "Urgent Care", href: "/services/urgent-care", icon: Stethoscope },
     // Center "FAB" is handled separately below
     { name: "Occ Health", href: "/employer-services", icon: Briefcase },
     { name: "Menu", action: () => setIsMenuOpen(true), icon: Menu },

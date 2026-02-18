@@ -38,7 +38,7 @@ export const SELF_PAY_TIERS = [
 ] as const;
 
 export const FIXED_PRICES = [
-  { service: "Sports Physical", price: "$35", note: "No appointment needed" },
+  { service: "Sports Physical", price: "$30", note: "No appointment needed" },
   { service: "DOT Physical", price: "$95", note: "Certified examiners" },
   { service: "Pre-employment Physical", price: "$50", note: "Includes paperwork" },
   { service: "TB Skin Test", price: "$25", note: "Results in 48-72 hrs" },
@@ -53,4 +53,3 @@ export const INSURANCES = [
   "Medicaid",
   "Tricare",
 ] as const;
-

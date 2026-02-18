@@ -5,12 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ChevronDown, Phone } from "lucide-react";
-import { EmployerMegaMenu } from "./EmployerMegaMenu";
-import { ServicesMegaMenu } from "./ServicesMegaMenu";
+import { MegaMenuPanel } from "./MegaMenuPanel";
+import { megaMenus } from "./megaMenus";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { ServiceFinderPalette } from "@/components/ui/ServiceFinderPalette";
-import { resourceLinks } from "@/lib/navigation";
 import type { Language } from "@/lib/i18n";
 
 const MEGA_MENU_LEAVE_DELAY_MS = 150;
@@ -167,12 +166,6 @@ export function Header({ language }: { language: Language }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  useEffect(() => {
-    if (!resourcesOpen || !resourcesAutoFocus) return;
-    const el = document.querySelector<HTMLAnchorElement>("#resources-menu a[href]");
-    el?.focus();
-  }, [resourcesAutoFocus, resourcesOpen]);
 
   useEffect(() => {
     if (!servicesMegaOpen) return;
@@ -365,31 +358,6 @@ export function Header({ language }: { language: Language }) {
                       {label}
                       <ChevronDown className="h-4 w-4" aria-hidden />
                     </button>
-                    {resourcesOpen && (
-                      <div
-                        id="resources-menu"
-                        className="absolute left-0 top-full pt-1"
-                        aria-label="Resources"
-                        onMouseEnter={() => {
-                          setResourcesAutoFocus(false);
-                          openResources();
-                        }}
-                        onMouseLeave={closeResourcesDelayed}
-                      >
-                        <div className="bg-white border border-slate-200 rounded-xl shadow-medical py-2 min-w-[180px]">
-                          {resourceLinks.map(({ name, href: linkHref }) => (
-                            <Link
-                              key={linkHref}
-                              href={linkHref}
-                              onClick={closeResources}
-                              className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-primary-blue transition-colors"
-                            >
-                              {name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </div>
                 );
               }
@@ -437,8 +405,9 @@ export function Header({ language }: { language: Language }) {
           </div>
         </div>
 
-        <div className="hidden md:block absolute left-0 right-0 top-full pt-0">
-          <ServicesMegaMenu
+        <div className="hidden md:block">
+          <MegaMenuPanel
+            menu={megaMenus.urgentCare}
             isOpen={servicesMegaOpen}
             onClose={closeServicesMega}
             onMouseEnter={() => openServicesMega({ autoFocus: false })}
@@ -446,17 +415,26 @@ export function Header({ language }: { language: Language }) {
             id="services-mega-menu"
             autoFocus={servicesAutoFocus}
           />
-        </div>
-
-        <div className="hidden md:block absolute left-0 right-0 top-full pt-0">
-          <div id="employer-mega-menu">
-            <EmployerMegaMenu
-              isOpen={employerMegaOpen}
-              onClose={closeEmployerMega}
-              onMouseEnter={openEmployerMega}
-              onMouseLeave={closeEmployerMegaDelayed}
-            />
-          </div>
+          <MegaMenuPanel
+            menu={megaMenus.occHealth}
+            isOpen={employerMegaOpen}
+            onClose={closeEmployerMega}
+            onMouseEnter={openEmployerMega}
+            onMouseLeave={closeEmployerMegaDelayed}
+            id="employer-mega-menu"
+          />
+          <MegaMenuPanel
+            menu={megaMenus.resources}
+            isOpen={resourcesOpen}
+            onClose={closeResources}
+            onMouseEnter={() => {
+              setResourcesAutoFocus(false);
+              openResources();
+            }}
+            onMouseLeave={closeResourcesDelayed}
+            id="resources-menu"
+            autoFocus={resourcesAutoFocus}
+          />
         </div>
       </div>
     </motion.header>

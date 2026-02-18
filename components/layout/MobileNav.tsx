@@ -18,9 +18,9 @@ const servicesMobileSections = [
     category: "Urgent Care",
     icon: Stethoscope,
     links: [
-      { name: "Minor Injuries", href: "/services/urgent-care#injuries" },
-      { name: "Minor Illnesses", href: "/services/urgent-care#illnesses" },
-      { name: "Sports Physicals", href: "/services/urgent-care" },
+      { name: "Injury & Trauma", href: "/services/urgent-care/injury" },
+      { name: "Illness & Infection", href: "/services/urgent-care/illness" },
+      { name: "Wellness & Vaccines", href: "/services/urgent-care/wellness" },
       { name: "Care Paths", href: "/care" },
     ],
   },

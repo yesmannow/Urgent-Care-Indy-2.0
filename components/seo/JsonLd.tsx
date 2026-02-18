@@ -52,7 +52,7 @@ const jsonLd = {
       {
         "@type": "Offer",
         itemOffered: { "@type": "Service", name: "Sports Physical" },
-        price: "35.00",
+        price: "30.00",
         priceCurrency: "USD",
       },
       {

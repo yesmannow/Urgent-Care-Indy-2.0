@@ -16,7 +16,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["sore throat", "strep", "tonsils", "swallow", "throat pain"],
     recommendation: "urgent-care",
     description: "Evaluation and rapid testing when appropriate.",
-    href: "/services/urgent-care#illnesses",
+    href: "/services/urgent-care/illness",
   },
   {
     id: "fever-flu",
@@ -24,7 +24,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["fever", "flu", "chills", "body aches", "influenza", "covid", "sick"],
     recommendation: "urgent-care",
     description: "Rapid tests and treatment options for common respiratory illnesses.",
-    href: "/services/urgent-care#illnesses",
+    href: "/services/urgent-care/illness",
   },
   {
     id: "cough-cold",
@@ -32,7 +32,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["cough", "cold", "congestion", "sinus", "runny nose", "bronchitis"],
     recommendation: "urgent-care",
     description: "Rule out common causes and help you recover faster.",
-    href: "/services/urgent-care#illnesses",
+    href: "/services/urgent-care/illness",
   },
   {
     id: "ear-infection",
@@ -40,7 +40,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["ear", "earache", "otitis", "ear infection", "pressure"],
     recommendation: "urgent-care",
     description: "Assessment and treatment when needed.",
-    href: "/services/urgent-care#illnesses",
+    href: "/services/urgent-care/illness",
   },
   {
     id: "pink-eye",
@@ -48,7 +48,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["pink eye", "conjunctivitis", "eye redness", "eye discharge"],
     recommendation: "urgent-care",
     description: "Evaluation and treatment guidance.",
-    href: "/services/urgent-care#illnesses",
+    href: "/services/urgent-care/illness",
   },
   {
     id: "uti",
@@ -56,7 +56,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["uti", "urinary", "burning", "painful urination", "frequent urination"],
     recommendation: "urgent-care",
     description: "Testing and treatment when appropriate.",
-    href: "/services/urgent-care#illnesses",
+    href: "/services/urgent-care/illness",
   },
   {
     id: "sprain-strain",
@@ -64,7 +64,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["sprain", "strain", "ankle", "wrist", "knee", "swollen", "twisted"],
     recommendation: "urgent-care",
     description: "Evaluation and imaging options when needed.",
-    href: "/services/urgent-care#injuries",
+    href: "/services/urgent-care/injury",
   },
   {
     id: "minor-cut-stitches",
@@ -72,7 +72,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["cut", "laceration", "stitches", "bleeding", "wound"],
     recommendation: "urgent-care",
     description: "Wound care and closure for many minor cuts.",
-    href: "/services/urgent-care#injuries",
+    href: "/services/urgent-care/injury",
   },
   {
     id: "possible-fracture",
@@ -80,7 +80,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["broken", "fracture", "x-ray", "bone", "hurt to move", "deformity"],
     recommendation: "urgent-care",
     description: "On-site evaluation; escalation if severe or complex.",
-    href: "/services/diagnostics",
+    href: "/services/urgent-care/labs",
   },
   {
     id: "allergies-asthma",
@@ -88,7 +88,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["allergy", "allergies", "asthma", "wheezing", "inhaler", "seasonal"],
     recommendation: "urgent-care",
     description: "Treatment for many non-severe symptoms.",
-    href: "/services/urgent-care#illnesses",
+    href: "/services/urgent-care/illness",
   },
   {
     id: "sti-screening",
@@ -104,7 +104,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["vaccine", "shot", "flu shot", "immunization", "tetanus"],
     recommendation: "urgent-care",
     description: "Common adult vaccines and seasonal options.",
-    href: "/services/prevention#vaccines",
+    href: "/services/urgent-care/wellness",
   },
   {
     id: "sports-physical",
@@ -112,7 +112,7 @@ const BASE_ITEMS: ServiceFinderItem[] = [
     keywords: ["sports physical", "physical", "school", "athlete"],
     recommendation: "info",
     description: "Quick turnaround; walk-ins welcome.",
-    href: "/services/urgent-care",
+    href: "/services/urgent-care/wellness",
   },
   {
     id: "dot-physical",
@@ -223,4 +223,3 @@ export function getServiceFinderResults(query: string, limit = 12): ServiceFinde
     .sort((a, b) => b.score - a.score)
     .slice(0, limit);
 }
-
