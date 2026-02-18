@@ -5,8 +5,15 @@ import Link from "next/link";
 import {
   Stethoscope,
   Microscope,
-  Activity,
-  Building2,
+  Bandage,
+  Thermometer,
+  Dumbbell,
+  Compass,
+  FlaskConical,
+  HeartPulse,
+  Syringe,
+  ShieldCheck,
+  FileText,
 } from "lucide-react";
 
 const menuData = [
@@ -14,30 +21,21 @@ const menuData = [
     category: "Urgent Care",
     icon: Stethoscope,
     links: [
-      { name: "Minor Injuries", href: "/services/urgent-care#injuries" },
-      { name: "Minor Illnesses", href: "/services/urgent-care#illnesses" },
-      { name: "Sports Physicals", href: "/services/urgent-care" },
-    ],
-  },
-  {
-    category: "Employer Services",
-    icon: Building2,
-    links: [
-      { name: "DOT Physicals", href: "/employer-services#physicals" },
-      { name: "Drug Screening", href: "/employer-services#drug-testing" },
-      { name: "Workers' Comp", href: "/employer-services#workers-comp" },
-      { name: "Employer Overview", href: "/employer-services" },
+      { name: "Minor Injuries", href: "/services/urgent-care#injuries", icon: Bandage },
+      { name: "Minor Illnesses", href: "/services/urgent-care#illnesses", icon: Thermometer },
+      { name: "Sports Physicals", href: "/services/urgent-care", icon: Dumbbell },
+      { name: "Care Paths (Symptom Guides)", href: "/care", icon: Compass },
     ],
   },
   {
     category: "Diagnostics & Prevention",
     icon: Microscope,
     links: [
-      { name: "On-Site Labs", href: "/services/diagnostics#labs" },
-      { name: "EKG Services", href: "/services/diagnostics#ekg" },
-      { name: "Vaccines & Shots", href: "/services/prevention#vaccines" },
-      { name: "STI Screening", href: "/services/prevention#sti" },
-      { name: "Patient Forms", href: "/resources/forms" },
+      { name: "On-Site Labs", href: "/services/diagnostics#labs", icon: FlaskConical },
+      { name: "EKG Services", href: "/services/diagnostics#ekg", icon: HeartPulse },
+      { name: "Vaccines & Shots", href: "/services/prevention#vaccines", icon: Syringe },
+      { name: "STI Screening", href: "/services/prevention#sti", icon: ShieldCheck },
+      { name: "Patient Forms", href: "/resources/forms", icon: FileText },
     ],
   },
 ];
@@ -78,7 +76,7 @@ export function ServicesMegaMenu({
       onMouseLeave={onMouseLeave ?? onClose}
       aria-label="Services"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {menuData.map((section) => {
           const Icon = section.icon;
           return (
@@ -90,16 +88,21 @@ export function ServicesMegaMenu({
               <ul className="space-y-3" role="list">
                 {section.links.map((link) => (
                   <li key={link.href}>
+                    {(() => {
+                      const LinkIcon = link.icon;
+                      return (
                     <Link
                       href={link.href}
                       onClick={onClose}
                       className="flex items-center gap-3 text-slate-600 hover:text-teal-600 font-medium text-sm group/item transition-colors"
                     >
                       <span className="p-1.5 bg-slate-50 group-hover/item:bg-teal-50 rounded-lg text-slate-400 group-hover/item:text-teal-600 transition-colors shrink-0">
-                        <Activity className="h-3.5 w-3.5" aria-hidden />
+                        <LinkIcon className="h-3.5 w-3.5" aria-hidden />
                       </span>
                       {link.name}
                     </Link>
+                      );
+                    })()}
                   </li>
                 ))}
               </ul>
@@ -112,18 +115,18 @@ export function ServicesMegaMenu({
       <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <p className="text-sm font-bold text-slate-900">
-            Need a DOT Physical?
+            Not sure where to go?
           </p>
           <p className="text-xs text-slate-500">
-            FMCSA certified examiners on staff daily.
+            Use Care Paths for quick symptom-based guidance.
           </p>
         </div>
         <Link
-          href="/schedule"
+          href="/care"
           onClick={onClose}
           className="inline-flex items-center justify-center text-sm font-bold bg-slate-900 text-white px-5 py-2.5 rounded-xl hover:bg-teal-600 transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
         >
-          Save Your Spot
+          Browse Care Paths
         </Link>
       </div>
     </div>

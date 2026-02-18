@@ -8,7 +8,6 @@ import { EmployerMegaMenu } from "./EmployerMegaMenu";
 import { MobileNav } from "./MobileNav";
 import { ServicesMegaMenu } from "./ServicesMegaMenu";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { EmergencyToggleBar } from "@/components/ui/EmergencyToggleBar";
 import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { ServiceFinderPalette } from "@/components/ui/ServiceFinderPalette";
 import { resourceLinks } from "@/lib/navigation";
@@ -206,7 +205,6 @@ export function Header({ language }: { language: Language }) {
       className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200"
     >
       <Breadcrumbs />
-      <EmergencyToggleBar />
 
       <div className="relative">
         <div className="container flex items-center justify-between h-16 gap-6">
@@ -383,9 +381,9 @@ export function Header({ language }: { language: Language }) {
             })}
           </nav>
 
-          <div className="flex items-center gap-4 shrink-0">
-            <ServiceFinderPalette />
-            <LanguageToggle language={language} />
+          <div className="flex items-center gap-3 shrink-0">
+            <ServiceFinderPalette variant="icon" />
+            <LanguageToggle language={language} size="sm" />
             <Link
               href="https://www.mymedicallocker.com"
               target="_blank"

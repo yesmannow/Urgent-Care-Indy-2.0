@@ -10,7 +10,7 @@ export function ChatWidget() {
   return (
     <Script
       id="chatbase-widget"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       dangerouslySetInnerHTML={{ __html: CHATBASE_INIT_SCRIPT }}
     />
   );

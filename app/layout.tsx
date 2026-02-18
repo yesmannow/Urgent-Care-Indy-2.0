@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { cookies } from "next/headers";
 import "./globals.css";
-import { JsonLd } from "@/components/seo/JsonLd";
 import { AirQualityAlert } from "@/components/tools/AirQualityAlert";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { MobileStickyCTA } from "@/components/ui/MobileStickyCTA";
 import { ChatWidget } from "@/components/ChatWidget";
-import { DEFAULT_LANGUAGE, LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/i18n";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PwaInstallPrompt } from "@/components/tools/PwaInstallPrompt";
+import { MobileStickyCTA } from "@/components/ui/MobileStickyCTA";
+import { DEFAULT_LANGUAGE, LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/i18n";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Urgent Care Indy",
   },
   description:
-    "No appointment needed, $35 sports physicals. Pike Township urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Michigan Rd medical—open M–F 8am–6:30pm, Sat 8am–2:30pm.",
+    "No appointment needed, $35 sports physicals. Pike Township urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Open Mon-Fri 8am-6:30pm, Sat 8am-2:30pm.",
   keywords: [
     "Urgent Care",
     "Indianapolis",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     siteName: "Urgent Care Indy",
     title: "Urgent Care Indy | Immediate Care & Occupational Health in Indianapolis",
     description:
-      "No appointment needed, $35 sports physicals. Family-owned urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Open M–F 8am–6:30pm, Sat 8am–2:30pm.",
+      "No appointment needed, $35 sports physicals. Family-owned urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Open Mon-Fri 8am-6:30pm, Sat 8am-2:30pm.",
     images: [
       {
         url: "/images/logo.png",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Urgent Care Indy | Immediate Care & Occupational Health in Indianapolis",
     description:
-      "No appointment needed, $35 sports physicals. Family-owned urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Open M–F 8am–6:30pm, Sat 8am–2:30pm.",
+      "No appointment needed, $35 sports physicals. Family-owned urgent care on N Michigan Rd. Walk-in care, occupational health, X-ray, DOT physicals. Open Mon-Fri 8am-6:30pm, Sat 8am-2:30pm.",
   },
   robots: {
     index: true,
@@ -93,9 +93,7 @@ export default async function RootLayout({
 
   return (
     <html lang={language}>
-      <body
-        className={`${geist.variable} font-sans antialiased bg-slate-50 min-h-screen flex flex-col`}
-      >
+      <body className={`${geist.variable} font-sans antialiased bg-slate-50 min-h-screen flex flex-col`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[70] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-blue"
@@ -116,3 +114,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

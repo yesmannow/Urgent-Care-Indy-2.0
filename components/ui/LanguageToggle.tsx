@@ -8,7 +8,13 @@ function setCookie(name: string, value: string) {
   document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; Max-Age=${oneYear}; Path=/; SameSite=Lax`;
 }
 
-export function LanguageToggle({ language }: { language: Language }) {
+export function LanguageToggle({
+  language,
+  size = "md",
+}: {
+  language: Language;
+  size?: "sm" | "md";
+}) {
   const router = useRouter();
 
   const setLanguage = (next: Language) => {
@@ -16,9 +22,19 @@ export function LanguageToggle({ language }: { language: Language }) {
     router.refresh();
   };
 
+  const containerClass =
+    size === "sm"
+      ? "hidden md:inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5"
+      : "hidden md:inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm";
+
+  const buttonBase =
+    size === "sm"
+      ? "min-h-[28px] px-2 rounded-full text-xs font-extrabold transition-colors"
+      : "min-h-[36px] px-3 rounded-full text-sm font-extrabold transition-colors";
+
   return (
     <div
-      className="hidden md:inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm"
+      className={containerClass}
       role="group"
       aria-label="Language"
     >
@@ -26,7 +42,7 @@ export function LanguageToggle({ language }: { language: Language }) {
         type="button"
         onClick={() => setLanguage("en")}
         aria-pressed={language === "en"}
-        className={`min-h-[36px] px-3 rounded-full text-sm font-extrabold transition-colors ${
+        className={`${buttonBase} ${
           language === "en" ? "bg-slate-900 text-white" : "text-slate-700 hover:bg-slate-50"
         }`}
       >
@@ -36,7 +52,7 @@ export function LanguageToggle({ language }: { language: Language }) {
         type="button"
         onClick={() => setLanguage("es")}
         aria-pressed={language === "es"}
-        className={`min-h-[36px] px-3 rounded-full text-sm font-extrabold transition-colors ${
+        className={`${buttonBase} ${
           language === "es" ? "bg-slate-900 text-white" : "text-slate-700 hover:bg-slate-50"
         }`}
       >
@@ -45,4 +61,3 @@ export function LanguageToggle({ language }: { language: Language }) {
     </div>
   );
 }
-

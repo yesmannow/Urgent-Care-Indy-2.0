@@ -2,15 +2,15 @@
 
 import { useState, type ReactNode } from "react";
 import Image from "next/image";
+import { DiagnosticCommandCenter } from "@/components/home/DiagnosticCommandCenter";
+import { FloatingActionButton } from "@/components/home/FloatingActionButton";
 import { HeroSection } from "@/components/home/HeroSection";
+import { SaveSpotModal } from "@/components/SaveSpotModal";
 import { TrustSignals } from "@/components/home/TrustSignals";
 import { TriageToggle } from "@/components/tools/TriageToggle";
-import { DiagnosticCommandCenter } from "@/components/home/DiagnosticCommandCenter";
 import { ClinicMap } from "@/components/ui/ClinicMap";
 import { DivisionCards } from "@/components/clinic/DivisionCards";
 import { PrimaryCareBridge } from "@/components/sections/PrimaryCareBridge";
-import { SaveSpotModal } from "@/components/SaveSpotModal";
-import { FloatingActionButton } from "@/components/home/FloatingActionButton";
 import type { Language } from "@/lib/i18n";
 
 type Props = {
@@ -37,7 +37,7 @@ export function HomePageWithSaveSpot({
           directions: "Cómo llegar",
           serving: "Atendemos el noroeste de Indianápolis",
           servingBody:
-            "Convenientemente ubicados en Michigan Rd, somos la opción preferida para residentes de Pike Township, Zionsville, Carmel y el noroeste de Indy. A minutos de I‑465.",
+            "Convenientemente ubicados en Michigan Rd, somos la opción preferida para residentes de Pike Township, Zionsville, Carmel y el noroeste de Indy. A minutos de I-465.",
         }
       : {
           findUs: "Find Us",
@@ -52,43 +52,35 @@ export function HomePageWithSaveSpot({
   return (
     <>
       <HeroSection language={language} onSaveSpotClick={() => setSaveSpotModalOpen(true)} />
-      <SaveSpotModal
-        isOpen={saveSpotModalOpen}
-        onClose={() => setSaveSpotModalOpen(false)}
-      />
+      <SaveSpotModal isOpen={saveSpotModalOpen} onClose={() => setSaveSpotModalOpen(false)} />
       <FloatingActionButton onSaveSpotClick={() => setSaveSpotModalOpen(true)} />
+
       {insertAfterHero}
       {insertBeforeMain}
+
       <TrustSignals />
+
       <section className="container py-12 md:py-16">
         <TriageToggle />
       </section>
+
       <DiagnosticCommandCenter />
-      {/* Find Us - clinic exterior + map */}
+
       <section className="container py-12 md:py-16 border-t border-slate-200 bg-white">
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">
-          {copy.findUs}
-        </h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">{copy.findUs}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           <div className="space-y-6">
             <div>
               <p className="text-lg font-bold text-slate-900 mb-2">
                 7911 N Michigan Rd, Indianapolis, IN 46268
               </p>
+              <p className="text-slate-600 mb-2">{copy.hours}</p>
               <p className="text-slate-600 mb-2">
-                {copy.hours}
-              </p>
-              <p className="text-slate-600 mb-2">
-                <a
-                  href="tel:+13179566288"
-                  className="text-primary-blue font-medium hover:underline"
-                >
+                <a href="tel:+13179566288" className="text-primary-blue font-medium hover:underline">
                   (317) 956-6288
                 </a>
               </p>
-              <p className="text-slate-500 text-sm mt-4">
-                {copy.nearby}
-              </p>
+              <p className="text-slate-500 text-sm mt-4">{copy.nearby}</p>
               <a
                 href="https://www.google.com/maps/dir//7911+N+Michigan+Rd,+Indianapolis,+IN+46268"
                 target="_blank"
@@ -114,27 +106,20 @@ export function HomePageWithSaveSpot({
         </div>
       </section>
 
-      {/* Hyper-local SEO: Serving Northwest Indianapolis */}
       <section
         className="container py-12 md:py-16 border-t border-slate-200 bg-slate-50"
         aria-labelledby="serving-heading"
       >
-        <h2
-          id="serving-heading"
-          className="text-2xl md:text-3xl font-bold text-slate-900 mb-6"
-        >
+        <h2 id="serving-heading" className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">
           {copy.serving}
         </h2>
-        <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
-          {copy.servingBody}
-        </p>
+        <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">{copy.servingBody}</p>
       </section>
 
-      {/* Wellness Ecosystem – sister clinics (Pike Medical divisions) */}
       <DivisionCards />
-
       <PrimaryCareBridge />
       {bottomSections}
     </>
   );
 }
+

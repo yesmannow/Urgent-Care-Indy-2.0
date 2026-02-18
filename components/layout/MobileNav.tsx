@@ -8,7 +8,6 @@ import {
   X,
   ChevronDown,
   Stethoscope,
-  Building2,
   Microscope,
 } from "lucide-react";
 import { resourceLinks } from "@/lib/navigation";
@@ -22,16 +21,7 @@ const servicesMobileSections = [
       { name: "Minor Injuries", href: "/services/urgent-care#injuries" },
       { name: "Minor Illnesses", href: "/services/urgent-care#illnesses" },
       { name: "Sports Physicals", href: "/services/urgent-care" },
-    ],
-  },
-  {
-    category: "Employer Services",
-    icon: Building2,
-    links: [
-      { name: "DOT Physicals", href: "/employer-services#physicals" },
-      { name: "Drug Screening", href: "/employer-services#drug-testing" },
-      { name: "Workers' Comp", href: "/employer-services#workers-comp" },
-      { name: "Employer Overview", href: "/employer-services" },
+      { name: "Care Paths", href: "/care" },
     ],
   },
   {
@@ -125,7 +115,15 @@ export function MobileNav({ isOpen, onOpen, onClose }: MobileNavProps) {
                   Our Clinic
                 </Link>
 
-                {/* Accordion: Services (Urgent Care, Employer, Diagnostics & Prevention) */}
+                <Link
+                  href="/employer-services"
+                  className="block py-3 text-slate-700 font-medium border-b border-slate-100"
+                  onClick={handleLinkClick}
+                >
+                  Occupational Health
+                </Link>
+
+                {/* Accordion: Services (Urgent Care, Diagnostics & Prevention) */}
                 <div className="border-b border-slate-100">
                   <button
                     type="button"

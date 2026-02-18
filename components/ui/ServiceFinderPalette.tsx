@@ -21,7 +21,11 @@ function badgeStyles(rec: ServiceFinderRecommendation) {
   return "bg-slate-100 text-slate-700 border-slate-200";
 }
 
-export function ServiceFinderPalette() {
+type ServiceFinderPaletteProps = {
+  variant?: "full" | "icon";
+};
+
+export function ServiceFinderPalette({ variant = "full" }: ServiceFinderPaletteProps) {
   const router = useRouter();
   const inputId = useId();
   const listboxId = useId();
@@ -180,15 +184,25 @@ export function ServiceFinderPalette() {
         ref={launcherRef}
         type="button"
         onClick={openPalette}
-        className="hidden md:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+        className={
+          variant === "icon"
+            ? "hidden md:inline-flex items-center justify-center rounded-full border border-slate-200 bg-white h-10 w-10 text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+            : "hidden md:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+        }
         aria-label="Open service finder"
         aria-haspopup="dialog"
       >
-        <Search className="h-4 w-4" aria-hidden />
-        Find Care
-        <span className="ml-1 hidden lg:inline text-xs font-semibold text-slate-400" aria-hidden>
-          Ctrl K
-        </span>
+        <Search className={variant === "icon" ? "h-5 w-5" : "h-4 w-4"} aria-hidden />
+        {variant === "full" ? (
+          <>
+            Find Care
+            <span className="ml-1 hidden lg:inline text-xs font-semibold text-slate-400" aria-hidden>
+              Ctrl K
+            </span>
+          </>
+        ) : (
+          <span className="sr-only">Find care (Ctrl+K)</span>
+        )}
       </button>
 
       <AnimatePresence>

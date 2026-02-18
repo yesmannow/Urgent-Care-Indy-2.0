@@ -16,6 +16,23 @@
     0 2px 4px -1px rgba(30, 64, 175, 0.03);
   /* Geist from layout (next/font) – variable name kept for compatibility */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Radii */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration: 220ms;
+  --duration-slow: 320ms;
+
+  /* Layout */
+  --section-y: 4rem;
+  --section-y-lg: 5rem;
 }
 
 /* Primary button pulse on hover */

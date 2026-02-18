@@ -17,8 +17,8 @@ export default function PricingPage() {
             Transparent Pricing
           </h1>
           <p className="mt-2 text-lg text-slate-600">
-            Self-pay office visits from $100 per visit. Fixed prices for sports
-            physicals, DOT exams, and more.{" "}
+            Self-pay office visits from $100 per visit. Fixed prices for sports physicals, DOT exams,
+            and more.{" "}
             <a
               href="#insurance"
               className="text-primary-blue font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2 rounded"
@@ -31,11 +31,8 @@ export default function PricingPage() {
 
         <PricingGrid />
 
-        {/* Check Insurance CTA */}
         <div className="mt-10 p-6 rounded-2xl bg-white border border-slate-200 shadow-medical text-center">
-          <p className="text-slate-700 font-medium mb-2">
-            Not sure if you&apos;re covered?
-          </p>
+          <p className="text-slate-700 font-medium mb-2">Not sure if you&apos;re covered?</p>
           <p className="text-slate-600">
             Call us at{" "}
             <a
@@ -48,10 +45,7 @@ export default function PricingPage() {
         </div>
 
         <p className="mt-8">
-          <Link
-            href="/"
-            className="text-primary-blue font-medium hover:underline"
-          >
+          <Link href="/" className="text-primary-blue font-medium hover:underline">
             ← Back to home
           </Link>
         </p>
@@ -59,3 +53,4 @@ export default function PricingPage() {
     </div>
   );
 }
+

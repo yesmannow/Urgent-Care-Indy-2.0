@@ -4,30 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
-
-const container = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.06, delayChildren: 0.05 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.35, ease: "easeOut" as const },
-  },
-};
+import { itemFadeInUp, staggerChildren } from "@/lib/motionPresets";
 
 export function TriageToggle() {
   const [isMajor, setIsMajor] = useState(false);
 
   return (
     <motion.section
-      variants={container}
+      variants={staggerChildren()}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
@@ -41,7 +25,7 @@ export function TriageToggle() {
           Is urgent care right for you?
         </h2>
 
-        <motion.div variants={item} className="flex flex-col gap-6">
+        <motion.div variants={itemFadeInUp} className="flex flex-col gap-6">
           <p className="text-sm font-medium text-slate-600">
             I have a{" "}
             <span className="text-slate-900 font-semibold">Minor Injury</span> /{" "}
